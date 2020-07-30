@@ -53,6 +53,6 @@ Ends SimulateAsync. Worker threads count = 0
 Continues Main. Worker threads count = 0
 Ends Main. Worker threads count = 0</code></pre>
 
-<p>Not only the thread count value changed but also the message order. The CLR just passed through zero delay to the next command and only after that returned control to <code>Main</code>.</p>
+<p>Not only the thread count value changed but also the message order. The CLR just passed through zero delay to the next line and only after <code>SimulateAsync</code> ended returned control to <code>Main</code> with the completed task.</p>
 
 
