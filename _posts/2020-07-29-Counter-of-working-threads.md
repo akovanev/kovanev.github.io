@@ -3,7 +3,7 @@ layout: post
 title: Counter of working threads 
 ---
 
-When wanting to get the count of existing thread pool threads you may start from looking at the framework <code>ThreadPool</code> property.
+<p>When wanting to get the count of the thread pool active threads it looks natural to use the <code>ThreadCount</code> property of the <code>ThreadPool</code>.</p>
 
 <pre><code class="C#">/// &lt;summary&gt;
 /// Gets the number of thread pool threads that currently exist.
@@ -18,13 +18,13 @@ public static extern int ThreadCount
 }
 </code></pre>
 
-<p>But the return value sometimes is greater than you may expect. I have an idea why is that so but now I just want to show my class that I am going to use in the future articles.</p>
+<p>However the return value may be greater than expected. To be honest, I didn't find any information regarding these magic types from "the count includes all types". But as a workaround I'm going to implement a sort of helper class that is focused on only available worker threads.</p>
 
-<pre><code class="C#">public class ThreadPoolCounter
+<pre><code class="C#">public class ThreadPoolThreadCounter
 {
     private static readonly int MaxWorkerThreads;
 
-    static ThreadPoolCounter()
+    static ThreadPoolThreadCounter()
     {
         ThreadPool.GetMaxThreads(out MaxWorkerThreads, out _);
     }
@@ -38,5 +38,3 @@ public static extern int ThreadCount
         }
     }
 }</code></pre>
-
-So the idea of <code>WorkerThreads</code> property is return only those working threads that are currently not available for other tasks.
