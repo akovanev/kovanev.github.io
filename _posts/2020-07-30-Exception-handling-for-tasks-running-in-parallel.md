@@ -8,7 +8,7 @@ title: Exception handling for tasks running in parallel
 <pre><code class="C#">static async Task Main(string[] args)
 {
     var doStuffTasks = Enumerable.Range(1, 10)
-        .Select(DoStuff)
+        .Select(DoStuffAsync)
         .ToList();
 
     var aggregateTask = Task.WhenAll(doStuffTasks);
@@ -34,7 +34,7 @@ title: Exception handling for tasks running in parallel
     }
 }
     
-static async Task&lt;int&gt; DoStuff(int value)
+static async Task&lt;int&gt; DoStuffAsync(int value)
 {
     await Task.Delay(1);
 
