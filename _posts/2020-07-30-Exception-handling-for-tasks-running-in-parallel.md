@@ -5,7 +5,7 @@ title: Exception handling for tasks running in parallel
 
 <p>Many developers have a fear of missing something while handling exceptions working with tasks. I'll create a small example that could be easily transformed to your needs.</p>
 
-<pre><code class="C#">static async Task Main(string[] args)
+<pre><code class="language-cs">static async Task Main(string[] args)
 {
     var doStuffTasks = Enumerable.Range(1, 10)
         .Select(DoStuffAsync)

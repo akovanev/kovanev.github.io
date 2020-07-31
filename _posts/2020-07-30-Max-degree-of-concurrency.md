@@ -5,11 +5,11 @@ title: Max degree of concurrency
 
 <p>Sometimes while calling a backend service there could be a strong restriction how many requests it can handle simultaneously. I'll modify the example from <a href="/2020/07/30/Exception-handling-for-tasks-running-in-parallel">Exception handling for tasks running in parallel</a> to show where the changes should come.</p>
 
-<pre><code class="C#">static async Task Main(string[] args)
+<pre><code class="language-cs">static async Task Main(string[] args)
 {
     <b>int maxDegreeOfConcurrency = 4; //Lets say it will be 4</b>
     <b>using var throttler = new SemaphoreSlim(maxDegreeOfConcurrency);</b>
-    
+
     var doStuffTasks = Enumerable.Range(1, <b>20</b>)
         .Select(<b>x => DoSimultaneousAsync(x, DoStuffAsync, throttler)</b>)
         .ToList();

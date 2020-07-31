@@ -7,7 +7,7 @@ title: When async code becomes sync
 
 <p>I'll create a small console application using <code>ThreadPoolThreadCounter</code> from my previous article <a href="/2020/07/29/Counter-of-working-threads">Counter of working threads</a> to show the amount of threads needed for specific runs.</p>
 
-<pre><code class="C#">static async Task Main(string[] args)
+<pre><code class="language-cs">static async Task Main(string[] args)
 {
     Console.WriteLine("Starts Main. Worker threads count = " +
                       ThreadPoolThreadCounter.WorkerThreads);
