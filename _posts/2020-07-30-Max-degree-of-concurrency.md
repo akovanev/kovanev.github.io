@@ -8,6 +8,8 @@ title: Max degree of concurrency
 <pre><code class="C#">static async Task Main(string[] args)
 {
     <b>int maxDegreeOfConcurrency = 4; //Lets say it will be 4</b>
+    <b>using var throttler = new SemaphoreSlim(maxDegreeOfConcurrency);</b>
+    
     var doStuffTasks = Enumerable.Range(1, <b>20</b>)
         .Select(<b>x => DoSimultaneousAsync(x, DoStuffAsync, throttler)</b>)
         .ToList();
