@@ -10,7 +10,7 @@ One of the step-by-step algorithms based on the <code>Task.WhenAll</code> method
 1. Create a collection of tasks.
 2. For that collection create an aggregate task using <code>Task.WhenAll</code>.
 3. <code>await</code> the aggregate task inside a <code>try-catch</code> block. <br>
-I would strongly recommend to additionally read  Stephen Cleary <a href="https://blog.stephencleary.com/2016/12/eliding-async-await.html">article</a>, in particular, its exceptions section.
+I would strongly recommend to additionally read  the Stephen Cleary <a href="https://blog.stephencleary.com/2016/12/eliding-async-await.html">article</a>, in particular, its exceptions section.
 4. Handle the aggregate task inner exceptions within the <code>catch</code> block.
 5. Iterate on completed tasks. 
 

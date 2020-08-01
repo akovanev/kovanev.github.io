@@ -3,41 +3,23 @@ layout: post
 title: Max degree of concurrency 
 ---
 
-<p>Sometimes while calling a backend service there could be a strong restriction how many requests it can handle simultaneously. I'll modify the example from <a href="/2020/07/30/Exception-handling-for-tasks-running-in-parallel">Exception handling for tasks running in parallel</a> to show where the changes should come.</p>
+In the previous article <a href="/2020/07/30/Exception-handling-for-tasks-running-in-parallel">Exception handling for tasks running in parallel</a> a general approach on how to safely work with multiple tasks running in parallel was suggested. Nevertheless, there are some situations when a number of tasks/calls/requests running simultaneously should be additionally restricted.
+
+A simple way to solve the issue is add the <code>SemaphoreSlim</code> class object.
 
 <pre><code class="language-cs">static async Task Main(string[] args)
 {
-    <b>int maxDegreeOfConcurrency = 4; //Lets say it will be 4</b>
-    <b>using var throttler = new SemaphoreSlim(maxDegreeOfConcurrency);</b>
+    int maxDegreeOfConcurrency = 4; 
+    using var throttler = new SemaphoreSlim(maxDegreeOfConcurrency);
 
-    var doStuffTasks = Enumerable.Range(1, <b>20</b>)
-        .Select(<b>x => DoSimultaneousAsync(x, DoStuffAsync, throttler)</b>)
+    var doStuffTasks = Enumerable.Range(1, 20)
+        .Select(x => DoSimultaneousStuffAsync(x, DoStuffAsync, throttler))
         .ToList();
 
-    var aggregateTask = Task.WhenAll(doStuffTasks);
-    try
-    {
-        //ConfigureAwait can be ignored in .net core
-        await aggregateTask.ConfigureAwait(false);
-    }
-    catch (Exception)
-    {
-        var errorMessages = aggregateTask.Exception
-                                ?.InnerExceptions
-                                .Select(x =&gt; x.Message)
-                            ?? new List&lt;string&gt;();
-
-        Console.WriteLine(string.Join(',', errorMessages));
-    }
-
-    //In .net core use IsCompletedSuccessfully instead of !IsFaulted
-    foreach (var task in doStuffTasks.Where(t =&gt; !t.IsFaulted))
-    {
-        Console.WriteLine(await task);
-    }
+    //... 
 }
 
-<b>static async Task&lt;int&gt; DoSimultaneousAsync(
+static async Task&lt;int&gt; DoSimultaneousStuffAsync(
     int value,
     Func&lt;int, Task&lt;int&gt;&gt; doStuff,
     SemaphoreSlim throttler)
@@ -53,19 +35,7 @@ title: Max degree of concurrency
         Console.Write("-"); //For testing
         throttler.Release();
     }
-}</b>
-
-static async Task&lt;int&gt; DoStuffAsync(int value)
-{
-    await Task.Delay(1);
-
-    if (value % 3 == 0)
-        throw new ArgumentException(value.ToString(), nameof(value));
-
-    return value;
 }</code></pre>
 
-<p>Here is the output</p>
+The output represents the tasks running simultaneously. Apparently the maximum sequence of pluses going in a row is not greater than 4, which is precisely equal to the <code>maxDegreeOfConcurrency</code> value. 
 <pre><code class="nohighlight">++++-+--++-+-+-+---+++-+--+-++--++-+----</code></pre>
-
-<p>So there was no sequence of pluses going in a row more than the defined <code>maxDegreeOfConcurrency</code> value.</p>
