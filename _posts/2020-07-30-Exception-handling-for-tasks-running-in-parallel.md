@@ -3,7 +3,16 @@ layout: post
 title: Exception handling for tasks running in parallel 
 ---
 
-<p>Many developers have a fear of missing something while handling exceptions working with tasks. I'll create a small example that could be easily transformed to your needs.</p>
+Many developers have a fear of missing something while handling exceptions that can arise when multiple tasks are executed in parallel.
+
+One of the step-by-step algorithms based on the <code>Task.WhenAll</code> method is suggested below.
+
+1. Create a collection of tasks.
+2. For that collection create an aggregate task using <code>Task.WhenAll</code>.
+3. <code>await</code> the aggregate task inside a <code>try-catch</code> block. <br>
+I would strongly recommend to additionally read  Stephen Cleary <a href="https://blog.stephencleary.com/2016/12/eliding-async-await.html">article</a>, in particular, its exceptions section.
+4. Handle the aggregate task inner exceptions within the <code>catch</code> block.
+5. Iterate on completed tasks. 
 
 <pre><code class="language-cs">static async Task Main(string[] args)
 {
@@ -44,7 +53,7 @@ static async Task&lt;int&gt; DoStuffAsync(int value)
     return value;
 }</code></pre>
 
-<p>Here is the output</p>
+<p>Here is the output.</p>
 <pre><code class="nohighlight">3 (Parameter 'value'),6 (Parameter 'value'),9 (Parameter 'value')
 1
 2
@@ -53,11 +62,3 @@ static async Task&lt;int&gt; DoStuffAsync(int value)
 7
 8
 10</code></pre>
-
-<p>So step by step may look like</p>
-1. Create a collection of tasks 
-2. Create an aggregate task for that collection using <code>Task.WhenAll</code>.
-3. <code>await</code> the aggregate task inside <code>try-catch</code>. <br>
-I would strongly recommend to read additionally Stephen Cleary <a href="https://blog.stephencleary.com/2016/12/eliding-async-await.html">article</a> and its exceptions section.
-4. Handle the aggregate task inner exceptions within <code>catch</code> block.
-5. Iterate on completed tasks. 
