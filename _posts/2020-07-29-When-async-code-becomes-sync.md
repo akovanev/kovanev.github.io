@@ -3,9 +3,10 @@ layout: post
 title: When async code becomes sync 
 ---
 
-<p>It is known that the method marked as <code>async</code> does not have to be executed asynchronously. That, in turn, means that not every time extra thread pool threads needed.</p>
+As is known, a method marked as <code>async</code> does not have to be executed asynchronously. 
 
-<p>I'll create a small console application using <code>ThreadPoolThreadCounter</code> from my previous article <a href="/2020/07/29/Counter-of-working-threads">Counter of working threads</a> to show the amount of threads needed for specific runs.</p>
+Nevertheless, the first example represents the typical order of steps for an asynchronous run that well described in <a href="https://docs.microsoft.com/cs-cz/dotnet/csharp/programming-guide/concepts/async/task-asynchronous-programming-model#what-happens-in-an-async-method">What happens in the asynchronous method.
+</a>
 
 <pre><code class="language-cs">static async Task Main(string[] args)
 {
@@ -31,28 +32,29 @@ static async Task SimulateAsync()
     await Task.Delay(1);
 
     Console.WriteLine("Ends SimulateAsync. Worker threads count = " +
-        ThreadPoolThreadCounter.WorkerThreads); ;
+        ThreadPoolThreadCounter.WorkerThreads);
 }</code></pre>
 
-<p>Here is the output</p>
+Here is the output.
 <pre><code class="nohighlight">Starts Main. Worker threads count = 0
 Starts SimulateAsync. Worker threads count = 0
 Continues Main. Worker threads count = 0
 Ends SimulateAsync. Worker threads count = 1
 Ends Main. Worker threads count = 1</code></pre>
 
-<p>After getting <code>await Task.Delay(1)</code> the CLR gaves control back to <code>Main</code> to continue asynchronously, which is fine. </p>
-<p>Lets now reset the delay value to zero and run again.</p>
-<pre><code class="C#">//await Task.Delay(1);
+ The thing is, after the <code>await</code> operation in <code>SimulateAsync</code> is completed, a background thread from the <code>TreadPool</code> was assigned to the task. That is why the worker thread count value returned 1.
+
+ To show when the <code>async</code> code may run synchronously the example above should be modified so the delay is set to zero.
+ <pre><code class="C#">//await Task.Delay(1);
 await Task.Delay(0);</code></pre>
 
-<p>Here is the new output</p>
+The new output shows the different message order which exactly corresponds to a synchronous run.
 <pre><code class="nohighlight">Starts Main. Worker threads count = 0
 Starts SimulateAsync. Worker threads count = 0
 Ends SimulateAsync. Worker threads count = 0
 Continues Main. Worker threads count = 0
 Ends Main. Worker threads count = 0</code></pre>
+ 
+Besides, the worker threads count value was constantly equal to zero, therefore no extra threads were taken from the <code>ThreadPool</code>.  
 
-<p>Not only the thread count value changed but also the message order. The CLR just passed through zero delay to the next line and only after <code>SimulateAsync</code> ended returned control to <code>Main</code> with the completed task.</p>
-
-
+ The <code>ThreadPoolThreadCounter</code> implementation details can be found in <a href="/2020/07/29/Counter-of-working-threads">Counter of working threads.</a>
