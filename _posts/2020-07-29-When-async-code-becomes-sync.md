@@ -45,7 +45,7 @@ Ends Main. Worker threads count = 1</code></pre>
  The thing is, after the <code>await</code> operation in <code>SimulateAsync</code> is completed, a background thread from the <code>TreadPool</code> was assigned to the task. That is why the worker thread count value returned 1.
 
  To show when the <code>async</code> code may run synchronously the example above should be modified so the delay is set to zero.
- <pre><code class="C#">//await Task.Delay(1);
+ <pre><code class="language-cs">//await Task.Delay(1);
 await Task.Delay(0);</code></pre>
 
 The new output shows the different message order which exactly corresponds to a synchronous run.
