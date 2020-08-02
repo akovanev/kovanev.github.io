@@ -18,7 +18,7 @@ public static extern int ThreadCount
 }
 </code></pre>
 
-However the return value may be greater than expected. Unfortunatly, "the count includes all types" is not described well in the documentation. But as a workaround, the other <code>ThreadPool</code> methods could be used to count only available worker threads.
+However, the return value may be greater than expected. Unfortunately, "the count includes all types" is not described well in the documentation. But as a workaround, the other <code>ThreadPool</code> methods could be used to count only available worker threads.
 
 <pre><code class="language-cs">public class ThreadPoolThreadCounter
 {

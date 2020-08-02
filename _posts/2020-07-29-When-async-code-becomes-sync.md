@@ -5,7 +5,7 @@ title: When async code becomes sync
 
 As is known, a method marked as <code>async</code> does not have to be executed asynchronously. 
 
-Nevertheless, the first example represents the typical order of steps for an asynchronous run that well described in <a href="https://docs.microsoft.com/cs-cz/dotnet/csharp/programming-guide/concepts/async/task-asynchronous-programming-model#what-happens-in-an-async-method">What happens in the asynchronous method.
+Nevertheless, the first example represents the typical asynchronous run that well described in <a href="https://docs.microsoft.com/cs-cz/dotnet/csharp/programming-guide/concepts/async/task-asynchronous-programming-model#what-happens-in-an-async-method">What happens in the asynchronous method.
 </a>
 
 <pre><code class="language-cs">static async Task Main(string[] args)
@@ -42,7 +42,7 @@ Continues Main. Worker threads count = 0
 Ends SimulateAsync. Worker threads count = 1
 Ends Main. Worker threads count = 1</code></pre>
 
- The thing is, after the <code>await</code> operation in <code>SimulateAsync</code> is completed, a background thread from the <code>TreadPool</code> was assigned to the task. That is why the worker thread count value returned 1.
+ The thing is, after the <code>await</code> operation in <code>SimulateAsync</code> is completed, a background thread from the <code>TreadPool</code> was assigned to the task. That is why the worker thread count returns 1.
 
  To show when the <code>async</code> code may run synchronously the example above should be modified so the delay is set to zero.
  <pre><code class="language-cs">//await Task.Delay(1);

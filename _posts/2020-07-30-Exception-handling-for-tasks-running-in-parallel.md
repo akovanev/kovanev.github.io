@@ -5,7 +5,7 @@ title: Exception handling for tasks running in parallel
 
 Many developers have a fear of missing something while handling exceptions that can arise when multiple tasks are executed in parallel.
 
-One of the step-by-step algorithms based on the <code>Task.WhenAll</code> method is suggested below.
+One of the step-by-step approach based on the <code>Task.WhenAll</code> method is suggested below.
 
 1. Create a collection of tasks.
 2. For that collection create an aggregate task using <code>Task.WhenAll</code>.

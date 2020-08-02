@@ -3,7 +3,7 @@ layout: post
 title: Max degree of concurrency 
 ---
 
-In the previous article <a href="/2020/07/30/Exception-handling-for-tasks-running-in-parallel">Exception handling for tasks running in parallel</a> a general approach on how to safely work with multiple tasks running in parallel was suggested. Nevertheless, there are some situations when a number of tasks/calls/requests running simultaneously should be additionally restricted.
+In the previous article <a href="/2020/07/30/Exception-handling-for-tasks-running-in-parallel">Exception handling for tasks running in parallel</a> a general approach on how to safely work with multiple tasks running in parallel was suggested. Nevertheless, there are some situations when a number of tasks/calls/requests running simultaneously should be additionally limited.
 
 A simple way to solve the issue is add the <code>SemaphoreSlim</code> class object.
 
