@@ -52,7 +52,7 @@ Continues Main. Worker threads count = 0. Managed thread Id 1
 Ends SimulateAsync. Worker threads count = 1. Managed thread Id 4
 Ends Main. Worker threads count = 1. Managed thread Id 4</code></pre>
 
-When the main thread (with Id 1) reached <code>Task simulateTask = SimulateAsync();</code> it stepped into that method and ran until <code>await Task.Delay(1);</code>. As it was not possible to complete the command immediately, the thread returned to the <code>Main</code> and continued until <code>await simulateTask;</code>. Having found that the task is not completed yet, the thread with Id 1 has stopped. In the same situation, if it were a worker but not the main console application thread, it would return to the <code>ThreadPool</code>.
+When the main thread (with Id 1) reached <code>Task simulateTask = SimulateAsync();</code> it stepped into that method and ran until <code>await Task.Delay(1);</code>. As it was not possible to complete the command immediately, the thread returned to the <code>Main</code> and continued until <code>await simulateTask;</code>. Having found that the task is not completed yet, the thread with Id 1 has suspended. In the same situation, if it were a worker but not the main console application thread, it would return to the <code>ThreadPool</code>.
 Once <code>await Task.Delay</code> was finished, the execution engine was notified of that. It assigned a free background thread (with Id 4) to continue on <code>SimulateAsync</code>. That also explains why the worker (or background) threads count was increased by one.
 
  To show when the <code>async</code> code may run synchronously the example above will be modified so the delay is set to zero.
