@@ -5,7 +5,7 @@ title: When async code becomes sync
 
 As is known, a method marked as <code>async</code> does not have to be executed asynchronously. 
 
-Nevertheless, the first example represents the typical *asynchronous* run that well described in <a href="https://docs.microsoft.com/cs-cz/dotnet/csharp/programming-guide/concepts/async/task-asynchronous-programming-model#what-happens-in-an-async-method">What happens in the asynchronous method.
+Nevertheless, the first example represents the typical *asynchronous* run that well described in <a href="https://docs.microsoft.com/en-US/dotnet/csharp/programming-guide/concepts/async/task-asynchronous-programming-model#BKMK_WhatHappensUnderstandinganAsyncMethod">What happens in the asynchronous method.
 </a>
 
 <pre><code class="language-cs">static async Task Main(string[] args)
