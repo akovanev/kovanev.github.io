@@ -5,7 +5,7 @@ title: How to log metrics on different environments
 
 If an application has long-running tasks it is pretty common that there can be performance and/or memory issues. At first glance, it looks easy to add metrics as the .net framework contains a couple of very simple classes like <code>Stopwatch</code> and <code>GC</code>. The problems appeared when metrics should be logged in different ways depending on an object type, environment and so on.
 
-The idea of this article is combine several known approaches to write the code that can be reused for solving different applications needs.
+The idea of this article is combine several known approaches to write the code that can be reused for work with different metrics.
 
 <pre><code class="language-cs">public class MetricsWatcher : IDisposable
 {
@@ -51,7 +51,7 @@ The idea of this article is combine several known approaches to write the code t
     }
 }</code></pre>
 
-The <code>MetricsWatcher</code> class is basically decorating the <code>Stopwatch</code> with the option to measure the memory currently in use. The class does not know anything about the way how its data will be processed, formatted, logged. The main repsonisibility is raise an event when  the state is considered to be captured.
+The <code>MetricsWatcher</code> class is basically decorating the <code>Stopwatch</code> with the option to measure the memory which is currently in use. The class does not know anything about the way how its data will be processed, formatted, logged. The main repsonisibility is raise an event when  the state is considered to be captured.
 
 Using the <code>EventHandler</code> instead of a custom delegate is not mandatory but preferable for work with the <a href="https://github.com/dotnet/reactive">Reactive Extensions</a> that, in turn, provide more flexibility on the event-based approach.
 
