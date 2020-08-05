@@ -7,11 +7,11 @@ If an application has long-running tasks then it rarely goes without obtaining s
 
 For such tasks a common solution is usually based on creating some *decorator* on the framework feature, e.g. the <code>Stopwatch</code>. While a logger is just being injected in that *decorator*.
 
-There are a couple of problems this approach has. The first is how to control if the *decorator* method is allowed to be executed on the specific environment, the second, if yes - should it be logged the same way as on other environments or differently. 
+There are a couple of problems this approach has. The first is how to control if the *decorator* method is allowed to be executed on the specific environment, the second, if yes - should it log the data in the same way as on other environments or differently. 
 
 The main question to decide is where to put the *if-else* logic so it were flexible and the code out of the *decorator* should not have changed. 
 
-In the example below the *decorator* does not log anything. Besides, the *if-else* logic allowing to execute the measurement is also moved out. 
+In the example below the *decorator* does not log anything. Besides, the *if-else* logic is also moved out. 
 <pre><code class="language-cs">public class MetricsWatcher : IDisposable
 {
     private readonly Type _caller;
