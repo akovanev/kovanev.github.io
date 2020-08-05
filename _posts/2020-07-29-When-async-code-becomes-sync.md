@@ -66,6 +66,6 @@ Ends SimulateAsync. Worker threads count = 0. Managed thread Id 1
 Continues Main. Worker threads count = 0. Managed thread Id 1
 Ends Main. Worker threads count = 0. Managed thread Id 1</code></pre>
 
-The output shows the different message order which exactly corresponds to a *synchronous* run. The magic is that while a new run it appeared that <code>await Task.Delay(0);</code> may be completed immediately. The main thread proceeded to the next command, then returned from the method and then, having reached <code>await simulateTask;</code>, went on as the task was already completed. The worker threads count value during the run was constantly equal to zero, only thread with Id 1 was involved and no extra threads were taken from the <code>ThreadPool</code>.  
+The output shows the different message order which exactly corresponds to a *synchronous* run. The magic is that while a new run it appeared that <code>await Task.Delay(0);</code> may be completed immediately. The main thread proceeded to the next command, then returned from the method and then, having reached <code>await simulateTask;</code>, went on as the task was already completed. The worker threads count value was constantly equal to zero during the run, only the thread with Id 1 was involved and no extra threads were taken from the <code>ThreadPool</code>.  
 
  The <code>ThreadPoolThreadCounter</code> implementation details can be found in <a href="/2020/07/29/Counter-of-working-threads">Counter of working threads.</a>
