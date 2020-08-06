@@ -5,13 +5,13 @@ title: How to log metrics on different environments
 
 If an application has long-running tasks then it rarely goes without obtaining some measurements. If it is not a local environment then the first question to be answered is whether the execution of the measurement code affects performance or causes some other issues. After decision what should be measured, another question should be put on the table - how to log the data. In general, the logging strategy may vary depending not only on an environment itself but also taking into account an object type, a calling method and so on.
 
-For such tasks a common solution is usually based on creating some *decorator* on the framework feature, e.g. the <code>Stopwatch</code>. While a logger is just being injected in that *decorator*.
+For such tasks a common solution is usually based on creating some *auxiliary class* on the framework feature, e.g. the <code>Stopwatch</code>. While a logger is just being injected in that *auxiliary*.
 
-There are a couple of problems this approach has. The first is how to control if the *decorator* method is allowed to be executed on the specific environment, the second, if yes - should it log the data in the same way as on other environments or differently. 
+There are a couple of problems this approach has. The first is how to control if the *auxiliary* method is allowed to be executed on the specific environment, the second, if yes - should it log the data in the same way as on other environments or differently. 
 
-The main question to decide is where to put the *if-else* logic so it were flexible and the code out of the *decorator* should not have changed. 
+The main question to decide is where to put the *if-else* logic so it were flexible and the code out of the *auxiliary* should not have changed. 
 
-In the example below the *decorator* does not log anything. Besides, the *if-else* logic is also moved out. 
+In the example below the *auxiliary* does not log anything. Besides, the *if-else* logic is also moved out. 
 <pre><code class="language-cs">public class MetricsWatcher : IDisposable
 {
     private readonly Type _caller;
@@ -56,7 +56,7 @@ In the example below the *decorator* does not log anything. Besides, the *if-els
     }
 }</code></pre>
 
-Apart of decorating the <code>Stopwatch</code>, the <code>MetricsWatcher</code> has an option to measure the memory which is currently in use. The <code>MetricsWatcher</code> does not know anything about the way how its data will be processed, formatted, logged. The important thing it should do is raise an event when the state is considered to be captured.
+Apart of managing the <code>Stopwatch</code>, the <code>MetricsWatcher</code> has an option to measure the memory which is currently in use. The <code>MetricsWatcher</code> does not know anything about the way how its data will be processed, formatted, logged. The important thing it should do is raise an event when the state is considered to be captured.
 
 Using the <code>EventHandler</code> instead of a custom delegate is not mandatory but preferable for work with the <a href="https://github.com/dotnet/reactive">Reactive Extensions</a>. That, in turn, provides more flexibility on the event-based approach.
 
