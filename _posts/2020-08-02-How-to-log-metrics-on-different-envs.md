@@ -104,7 +104,7 @@ The *if-else* logic for setting loggers up can be added here. Bear in mind also 
         MetricsWatcherOptions options,
         [CallerMemberName] string method = "")
     {
-        var mw = new MetricsWatcher(typeof(Program), options, method);
+        var mw = new MetricsWatcher(caller, options, method);
         var sequence = Observable.FromEventPattern&lt;MetricsWatcherArgs&gt;(
             handler => mw.OnCaptured += handler,
             handler => mw.OnCaptured -= handler);
