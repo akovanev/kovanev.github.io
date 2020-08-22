@@ -5,12 +5,10 @@ title: About
 
 <img src="../public/ava.jpg" width="80%" height="80%">
 
-<p>
-  Hey! This is Alex. First of all, he is a loving father, husband and son, and only then is he the guy who loves to program in C#.
-</p>
-<p>
-  His first C# code was written in 2005. Since then he has been trying to learn and help others doing cool things using this nice language.
-</p>
+Hey, I'm Alex! First and foremost I am a loving father, husband, and son. After that, I am a guy who loves to program in C#.
+
+I first started writing C# code in 2005. Since then I have been trying to learn and help others do cool things using this great language.
+
 <br>
 <div>
   <div style="float:left;">
