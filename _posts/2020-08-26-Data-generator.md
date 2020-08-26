@@ -5,7 +5,7 @@ title: Data generator
 
 The idea behind this post is to show how specific test data can be easily prepared using the <a href="https://github.com/akovanev/DataGenerator/">DataGenerator</a>.
 
-Let's suppost that you have to import thousands of products from an external system. You wrote the code that retrieves the data by http, map them onto your object models and process them further. Before everything is ready to go in live, and also for the purpose of unit/integration tests, you want to run your import task on some mock data. You also know that, despite the expectations, some data are coming to you inconsistent. So you want to try the edge cases as well.
+Let's suppost that you have to import thousands of products from an external system. You wrote the code that retrieves the data by http, mapped them onto your object models and processed them further. Before everything is ready to go in live, and also for the purpose of unit/integration tests, you want to run your import task on some mock data. You also know that, despite the expectations, some data are coming to you inconsistent. So you want to try the edge cases as well.
 
 Here is a simple example of models that you expect to work with.
 
