@@ -18,7 +18,7 @@ Here is a simple example of models that you expect to work with.
 
 class Sku
 {
-    public string SkuName {get; set;}
+    public string Name {get; set;}
     public decimal Price {get; set;}
 }</code></pre>
 
