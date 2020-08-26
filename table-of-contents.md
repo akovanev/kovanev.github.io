@@ -3,6 +3,10 @@ layout: page
 title: Table of Contents
 ---
 
+### Tools
+
+* <a href="/2020/08/26/Data-generator">Data generator</a>
+
 ### Logging
 
   * <a href="/2020/08/03/How-to-sanitize-sensitive-data">How to sanitize sensitive data</a>
