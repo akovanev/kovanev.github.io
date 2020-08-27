@@ -151,7 +151,7 @@ At last the definitions section describes the user defined objects, arrays and t
   }]
 </code></pre>
 
-A property type may have a list of settings like <code>minValue</code> or <code>maxSpaceCount</code>. Apart of that, every propery has the <code>failure</code> object with the values that define probabilities of happening a specific failure. In this way you can easy control the amount and types of inconsitent data.
+A property type may have a list of settings like <code>minValue</code> or <code>maxSpaceCount</code>. Apart of that, every propery has the <code>failure</code> object with the values that define probabilities of happening a specific failure. In this way you can easily control the amount different types of inconsitent data.
 
 After collecting all sections together and running the DataGenerator, the result should look like on the screenshot taken from the <a href="https://github.com/akovanev/DataGenerator/">JSON Editor Online</a> tool.
 

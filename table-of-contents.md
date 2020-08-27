@@ -3,8 +3,9 @@ layout: page
 title: Table of Contents
 ---
 
-### Tools
+### Data tools
 
+* <a href="/2020/08/27/Custom-data-generator">Custom data generator</a>
 * <a href="/2020/08/26/Data-generator">Data generator</a>
 
 ### Logging
