@@ -7,16 +7,7 @@ In the previous post about <a href="/2020/08/27/Data generator">Data generator</
 
 Now I want to show how to extend the existing library with a custom generator. Let's call it uint.
 
-<pre><code class="language-cs">"templates": [
-//...
-{
-  "type": "uint",
-  "name": "uint1"
-}]
-
-//...
-
-"definitions": [
+<pre><code class="language-cs">"definitions": [
   //...
   {
     "name": "Product",
@@ -24,7 +15,7 @@ Now I want to show how to extend the existing library with a custom generator. L
       //...
       {
         "name": "absValue",
-        "template": "uint1",
+        "type": "uint",
         "failure": {
           "nullable": 0.1,
           "range": 0.1 
@@ -40,12 +31,12 @@ After updating the json input file I should write some C# code, having prelimina
 
 <pre><code class="language-cs">public class UIntGenerator : GeneratorBase
 {
-    protected override object CreateImpl(Property property, Template template)
+    protected override object CreateImpl(Property property)
     {
         return GetRandom(0, 1000);
     }
 
-    protected override object CreateRangeFailureImpl(Property property, Template template)
+    protected override object CreateRangeFailureImpl(Property property)
     {
         return GetRandom(-100, -1);
     }

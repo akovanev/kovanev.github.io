@@ -22,137 +22,102 @@ class Sku
     public decimal Price {get; set;}
 }</code></pre>
 
-Now I want to show you how the data should be described in the DataGenerator input json. Basically the json consists of three sections: <code>templates</code>, <code>root</code> and <code>definitions</code>. The templates section is responsible for running a specific generator based on the property type and pattern. 
+Now I want to show you how the data should be described in the DataGenerator input json. Basically the json consists of the <code>root</code> property and the <code>definitions</code>.  
 
-<pre><code class="language-cs">"templates": [
-{
-  "type": "object",
-  "name": "root",
-  "pattern": "Root"
-},
-{
-  "type": "array",
-  "name": "array_product_template",
-  "pattern": "Product"
-},
-{
-  "type": "string",
-  "name": "string_template1",
-  "pattern": "abcdefghijklmnopqrstuvwxyz0123456789"
-},
-{
-  "type": "datetime",
-  "name": "datetime_template1",
-  "pattern": "dd/MM/yy"
-},
-{
-  "type": "array",
-  "name": "array_sku_template",
-  "pattern": "Sku"
-},
-{
-  "type": "double",
-  "name": "price_template",
-  "pattern": "0.00"
-},
-{
-  "type": "set",
-  "name": "count_template",
-  "pattern": "100"
-}]
-</code></pre>
-
-The section should contain the template for the root element. It is mandatory that the <code>type</code> must be <code>object</code>. In its turn the root element is considered to be an enrty point.
-
-<pre><code class="language-cs">"root":
-{
-  "name": null,
-  "template": "root"
-},
-</code></pre>
-
-At last the definitions section describes the user defined objects, arrays and their properties.
-
-<pre><code class="language-cs">"definitions": [
-  {
-    "name" : "Root",
-    "properties":[
-      {
-        "name":"count",
-        "template": "count_template"
-      },
-      {
-        "name":"products",
-        "template": "array_product_template",
-        "maxLength": 100
-      }
-    ]
-  },
-  {
-    "name": "Product",
-    "properties": [
-      {
-        "name": "name",
-        "template": "string_template1",
-        "minLength": 10,
-        "maxLength": 20,
-        "minSpaceCount": 1,
-        "maxSpaceCount": 2,
-        "failure": {
-          "nullable": 0.1,
-          "format": 0.1,
-          "range": 0.05 
+<pre><code class="language-cs">{
+  "root": "Root",
+  "definitions": [
+    {
+      "name": "Root",
+      "properties": [
+        {
+          "name": "count",
+          "type": "set",
+          "pattern": "100"
+        },
+        {
+          "name": "products",
+          "type": "array",
+          "pattern": "Product",
+          "maxLength": 100
         }
-      },
-      {
-        "name": "lastUpdated",
-        "template": "datetime_template1",
-        "minValue": "20/10/19",
-        "maxValue": "01/01/20",
-        "failure": {
-          "nullable": 0.1,
-          "format": 0.2,
-          "range": 0.1
+      ]
+    },
+    {
+      "name": "Product",
+      "properties": [
+        {
+          "name": "name",
+          "type": "string",
+          "pattern": "abcdefghijklmnopqrstuvwxyz0123456789",
+          "minLength": 10,
+          "maxLength": 20,
+          "minSpaceCount": 1,
+          "maxSpaceCount": 2,
+          "failure": {
+            "nullable": 0.1,
+            "format": 0.1,
+            "range": 0.05
+          }
+        },
+        {
+          "name": "lastUpdated",
+          "type": "datetime",
+          "pattern": "dd/MM/yy",
+          "minValue": "20/10/19",
+          "maxValue": "01/01/20",
+          "failure": {
+            "nullable": 0.1,
+            "format": 0.2,
+            "range": 0.1
+          }
+        },
+        {
+          "name": "skus",
+          "type": "array",
+          "pattern": "Sku",
+          "maxLength": 3
         }
-      },
-      {
-        "name": "skus",
-        "template": "array_sku_template",
-        "maxLength": 3
-      },
-    ]
-  },
-  {
-    "name": "Sku",
-    "properties": [
-      {
-        "name": "name",
-        "template": "string_template1",
-        "minLength": 10,
-        "maxLength": 50,
-        "minSpaceCount": 1,
-        "maxSpaceCount": 4,
-        "failure": {
-          "nullable": 0.25,
+      ]
+    },
+    {
+      "name": "Sku",
+      "properties": [
+        {
+          "name": "name",
+          "type": "string",
+          "pattern": "abcdefghijklmnopqrstuvwxyz0123456789",
+          "minLength": 10,
+          "maxLength": 50,
+          "minSpaceCount": 1,
+          "maxSpaceCount": 4,
+          "failure": {
+            "nullable": 0.25
+          }
+        },
+        {
+          "name": "price",
+          "type": "double",
+          "pattern": "0.00",
+          "minValue": 0.0,
+          "maxValue": 1999.99,
+          "failure": {
+            "nullable": 0.1,
+            "format": 0.05,
+            "range": 0.15
+          }
         }
-      },
-      {
-        "name": "price",
-        "template": "price_template",
-        "minValue": 0.0,
-        "maxValue": 1999.99,
-        "failure": {
-          "nullable": 0.1,
-          "format": 0.05,
-          "range": 0.15
-        }
-      }
-    ]
-  }]
-</code></pre>
+      ]
+    }
+  ]
+}</code></pre>
 
-A property type may have a list of settings like <code>minValue</code> or <code>maxSpaceCount</code>. Apart of that, every propery has the <code>failure</code> object with the values that define probabilities of happening a specific failure. In this way you can easily control the amount different types of inconsitent data.
+The root value specifies the enrty definition name. Every definition may point to other ones, there should not be circular references though. 
 
-After collecting all sections together and running the DataGenerator, the result should look like on the screenshot taken from the <a href="https://github.com/akovanev/DataGenerator/">JSON Editor Online</a> tool.
+Every property must have the <code>Type</code> value not empty. If the type is <code>array</code> or <code>object</code> then the <code>pattern</code> should be mandatory filled and reference to the definition in the file. For all the other types the default values are usually predefined. 
+
+A property may have also a list of settings like <code>minValue</code> or <code>maxSpaceCount</code>. Apart of that, the <code>failure</code> object containing  probabilities of happening a specific failure. In this way you can easily control inconsitent data and their nature.
+
+The result should look similar to the the screenshot taken from the <a href="https://github.com/akovanev/DataGenerator/">JSON Editor Online</a> tool.
 
 <img src="/public/datagen.png">
