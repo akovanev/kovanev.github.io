@@ -29,16 +29,18 @@ Now I want to show how to extend the existing library with a custom generator. L
 
 After updating the json input file I should write some C# code, having preliminarily included the dependency to the library.
 
-<pre><code class="language-cs">public class UIntGenerator : GeneratorBase
+<pre><code class="language-cs">public class UIntGenerator : NumberGenerator
 {
-    protected override object CreateImpl(Property property)
+    protected override object CreateImpl(PropertyObject propertyObject)
     {
-        return GetRandom(0, 1000);
+        Random random = GetRandomInstance(propertyObject);
+        return random.GetInt(0, 1000);    
     }
 
-    protected override object CreateRangeFailureImpl(Property property)
+    protected override object CreateRangeFailureImpl(PropertyObject propertyObject)
     {
-        return GetRandom(-100, -1);
+        Random random = GetRandomChoiceInstance();
+        return random.GetInt(-100, -1);
     }
 }
 
@@ -57,5 +59,7 @@ var dg = new DG(new ExtendedGeneratorFactory());
 Console.WriteLine(dg.Execute("data.json"));
 
 </code></pre>
+
+Using <code>GetRandomInstance</code> in <code>CreateImpl</code> and <code>GetRandomChoiceInstance</code> in <code>CreateRangeFailureImpl</code> should help the generated sequences to match the random distribution.
 
 Just a note. It is not mandatory to use the <code>DG</code> runner. If you need just to generate data, then you can call the <code>CreateData</code> method of the <code>DataProcessor</code> class.

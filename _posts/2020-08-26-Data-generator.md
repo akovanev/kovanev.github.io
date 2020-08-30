@@ -56,7 +56,7 @@ Now I want to show you how the data should be described in the DataGenerator inp
           "maxSpaceCount": 2,
           "failure": {
             "nullable": 0.1,
-            "format": 0.1,
+            "custom": 0.1,
             "range": 0.05
           }
         },
@@ -68,7 +68,7 @@ Now I want to show you how the data should be described in the DataGenerator inp
           "maxValue": "01/01/20",
           "failure": {
             "nullable": 0.1,
-            "format": 0.2,
+            "custom": 0.2,
             "range": 0.1
           }
         },
@@ -103,7 +103,7 @@ Now I want to show you how the data should be described in the DataGenerator inp
           "maxValue": 1999.99,
           "failure": {
             "nullable": 0.1,
-            "format": 0.05,
+            "custom": 0.05,
             "range": 0.15
           }
         }
