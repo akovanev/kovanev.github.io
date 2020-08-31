@@ -3,7 +3,7 @@ layout: post
 title: Custom data generator 
 ---
 
-In the previous post about <a href="/2020/08/27/Data generator">Data generator</a> I described how to get random test data.
+In the previous post about <a href="/2020/08/26/Data-generator">Data generator</a> I described how to get random test data.
 
 Now I want to show how to extend the existing library with a custom generator. Let's call it uint.
 

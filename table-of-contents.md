@@ -5,6 +5,7 @@ title: Table of Contents
 
 ### Data tools
 
+* <a href="/2020/08/31/Calculated-properties-with-data-generator">Calculated properties with data generator</a>
 * <a href="/2020/08/27/Custom-data-generator">Custom data generator</a>
 * <a href="/2020/08/26/Data-generator">Data generator</a>
 
