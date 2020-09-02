@@ -1,15 +1,17 @@
 ---
 layout: post
-title: How to log metrics on different environments
+title: How to Log Metrics on Different Environments
 ---
 
-If an application has long-running tasks then it rarely goes without obtaining some measurements. If it is not a local environment then the first question to be answered is whether the execution of the measurement code affects performance or causes some other issues. After decision what should be measured, another question should be put on the table - how to log the data. In general, the logging strategy may vary depending not only on an environment itself but also taking into account an object type, a calling method and so on.
+If an application has long-running tasks then it rarely goes without obtaining some measurements. If it is not a local environment then the good question is whether the execution of the measurement code itself may affect performance or cause some other issues. 
 
-For such tasks a common solution is usually based on creating some *auxiliary class* on the framework feature, e.g. the <code>Stopwatch</code>. While a logger is just being injected in that *auxiliary*.
+After making a decision what should be measured, another question - how to log the data. In general, the logging strategy may vary depending not only on an environment itself but also taking into account an object type, a running method and so on.
 
-There are a couple of problems this approach has. The first is how to control if the *auxiliary* method is allowed to be executed on the specific environment, the second, if yes - should it log the data in the same way as on other environments or differently. 
+For such tasks, it is common to create an *auxiliary class* encapsulating the logic of work with a standard framework feature. Something like the <code>StopwatchHelper</code>. While a logger is just being injected in that *auxiliary*.
 
-The main question to decide is where to put the *if-else* logic so it were flexible and the code out of the *auxiliary* should not have changed. 
+There are a couple of problems this approach has. The first is how to control if the *auxiliary* method is allowed to be executed on the specific environment. The second, if the answer on the previos question was yes - should it log the data in the same way as on other environments or differently. 
+
+One of the main questions to decide is where to put the *if-else* logic so the code would be flexible and easy to maintain. 
 
 In the example below the *auxiliary* does not log anything. Besides, the *if-else* logic is also moved out. 
 <pre><code class="language-cs">public class MetricsWatcher : IDisposable

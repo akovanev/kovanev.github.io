@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Calculated properties with Data generator 
+title: Calculated Properties with Data Generator 
 ---
 
-In the previous posts about <a href="/2020/08/26/Data-generator">Data generator</a> and <a href="/2020/08/27/Custom-data-generator">Custom data generator</a> I described a couple of simple scenarios for random test data generation.
+In the previous posts about <a href="/2020/08/26/Data-generator">Data Generator</a> and <a href="/2020/08/27/Custom-data-generator">Custom Data Generator</a> I described a couple of simple scenarios for random test data generation.
 
 Since the version 1.2 the DG may contain logic for the calculated properties. It looks a little tricky and requires writing the custom code but the good thing (I believe) is that you can control what and how should be calculated.
 

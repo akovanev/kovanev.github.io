@@ -1,13 +1,11 @@
 ---
 layout: post
-title: Data generator 
+title: Data Generator 
 ---
 
 The idea behind this post is to show how specific test data can be easily prepared using the <a href="https://github.com/akovanev/DataGenerator/">DataGenerator</a>.
 
-Let's suppost that you have to import thousands of products from an external system. You wrote the code that retrieves the data by http, mapped them onto your object models and processed them further. Before everything is ready to go in live, and also for the purpose of unit/integration tests, you want to run your import task on some mock data. You also know that, despite the expectations, some data are coming to you inconsistent. So you want to try the edge cases as well.
-
-Here is a simple example of models that you expect to work with.
+Here is a simple example of models.
 
 <pre><code class="language-cs">class Product
 {
@@ -22,7 +20,7 @@ class Sku
     public decimal Price {get; set;}
 }</code></pre>
 
-Now I want to show you how the data should be described in the DataGenerator input json. Basically the json consists of the <code>root</code> property and the <code>definitions</code>.  
+Now I want to show how the data should be described in the <code>DataGenerator</code> input json. Basically the json consists of the <code>root</code> property and the <code>definitions</code>.  
 
 <pre><code class="language-cs">{
   "root": "Root",
@@ -116,7 +114,7 @@ The root value specifies the enrty definition name. Every definition may point t
 
 Every property must have the <code>Type</code> value not empty. If the type is <code>array</code> or <code>object</code> then the <code>pattern</code> should be mandatory filled and reference to the definition in the file. For all the other types the default values are usually predefined. 
 
-A property may have also a list of settings like <code>minValue</code> or <code>maxSpaceCount</code>. Apart of that, the <code>failure</code> object containing  probabilities of happening a specific failure. In this way you can easily control inconsitent data and their nature.
+A property may have also a list of settings like <code>minValue</code> or <code>maxSpaceCount</code>. Apart of that, the <code>failure</code> object describes  probabilities of happening a specific failure. In this way you can easily control inconsitent data and their nature.
 
 The result should look similar to the the screenshot taken from the <a href="https://github.com/akovanev/DataGenerator/">JSON Editor Online</a> tool.
 

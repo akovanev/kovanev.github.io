@@ -1,6 +1,6 @@
 ---
 layout: post
-title: When async code becomes sync 
+title: When Async Code Becomes Sync 
 ---
 
 Hopefully you know that a method marked as <code>async</code> does not need to be executed *asynchronously*. 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Exception handling for tasks running in parallel 
+title: Exception Handling for Tasks Running in Parallel 
 ---
 
 Many developers have a fear of missing something while handling exceptions that can arise when multiple tasks are executed in parallel.
