@@ -3,22 +3,20 @@ layout: post
 title: Counter of Working Threads 
 ---
 
-When you need to get the number of active threads, it seems natural to start with the <code>ThreadCount</code> property of the <code>ThreadPool</code>.
+When you need to get the number of active threads, it seems natural to start with the <code>ThreadPool.ThreadCount</code> property.
+ 
+ According to the description, the <a href="https://docs.microsoft.com/en-us/dotnet/api/system.threading.threadpool.threadcount">ThreadPool.ThreadCount</a>
+ > Gets the number of thread pool threads that currently exist.
 
-<pre><code class="language-cs">/// &lt;summary&gt;
-/// Gets the number of thread pool threads that currently exist.
-/// &lt;/summary&gt;
-/// &lt;remarks&gt;
-/// For a thread pool implementation that may have different types of threads, the count includes all types.
-/// &lt;/remarks&gt;
-public static extern int ThreadCount
-{
-    [MethodImpl(MethodImplOptions.InternalCall)]
-    get;
-}
-</code></pre>
+However, that doesn't tell us anything about how many of them are active.
 
-However, its current value may be greater than expected. The comment tells us about different types of threads. I couldn't find any further information on this. Fortunately, the other <code>ThreadPool</code> methods can be used as a workaround to count only the available worker threads.
+Looking further, you can find that the <a href="https://docs.microsoft.com/en-us/dotnet/api/system.threading.threadpool.getavailablethreads">ThreadPoolGetAvailableThreads</a>
+
+>Retrieves the difference between the maximum number of thread pool threads returned by the GetMaxThreads(Int32, Int32) method, and the number **currently active**.
+
+This is exactly what we need.
+
+Now I'm going to create a simple helper class with a static property that counts the number of active worker threads.
 
 <pre><code class="language-cs">public class ThreadPoolThreadCounter
 {
