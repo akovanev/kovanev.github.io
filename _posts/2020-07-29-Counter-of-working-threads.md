@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Counter of working threads 
+title: Counter of Working Threads 
 ---
 
-When wanting to get the count of the thread pool active threads it looks natural to use the <code>ThreadCount</code> property of the <code>ThreadPool</code>.
+When you need to get the number of active threads, it seems natural to start with the <code>ThreadCount</code> property of the <code>ThreadPool</code>.
 
 <pre><code class="language-cs">/// &lt;summary&gt;
 /// Gets the number of thread pool threads that currently exist.
@@ -18,7 +18,7 @@ public static extern int ThreadCount
 }
 </code></pre>
 
-However, the return value may be greater than expected. Unfortunately, "the count includes all types" is not described well in the documentation. But as a workaround, the other <code>ThreadPool</code> methods could be used to count only available worker threads.
+However, its current value may be greater than expected. The comment tells us about different types of threads. I couldn't find any further information on this. Fortunately, the other <code>ThreadPool</code> methods can be used as a workaround to count only the available worker threads.
 
 <pre><code class="language-cs">public class ThreadPoolThreadCounter
 {
