@@ -82,7 +82,7 @@ To undserstand what has just happened, it might be helpful to analyze
 
 One more time. As you remember, the *Thread 1* stepped into <code>SimulateAsync</code> and continued *until it could*. 
 
-After I set the delay value to zero, the *Thread 1* was able to pass <code>await Task.Delay(0)</code>, as it didn't have to wait. In the same way as it passed the <code>Console.WriteLine</code> command on the previous step. So the *Thread 1* continued on <code>SimulateAsync</code>, completed it and got back to the <code>Main</code>, to the next line after <code>Task simulateTask = SimulateAsync()</code>. 
+After I set the delay value to zero, the *Thread 1* was able to pass <code>await Task.Delay(0)</code>, as it didn't have to wait. In the same way it passed the <code>Console.WriteLine</code> command on the previous step. So the *Thread 1* continued on <code>SimulateAsync</code>, completed it and got back to the <code>Main</code>, to the next line after <code>Task simulateTask = SimulateAsync()</code>. 
 
 Doesn't it look great?
 
