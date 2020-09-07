@@ -5,9 +5,11 @@ category: blogs
 tag: Data Generator 
 ---
 
-In the previous post about <a href="/2020/08/26/Data-generator">Data Generator</a> I described how to get random test data.
+In the previous post about <a href="/blogs/2020/08/26/Data-generator">Data Generator</a> I described how to generate the random data.
 
-Now I want to show how to extend the existing library with a custom generator. Let's call it uint.
+If there is a need to add a custom type, there is a pretty simple way how to solve this issue.
+
+Let add the `uint` type.
 
 <pre><code class="language-cs">"definitions": [
   //...
@@ -29,7 +31,7 @@ Now I want to show how to extend the existing library with a custom generator. L
 ]
 </code></pre>
 
-After updating the json input file I should write some C# code, having preliminarily included the dependency to the library.
+After having updated the json input, the next should be creating the `UIntGenerator` class. Do not forget to include the reference to the <a href="https://www.nuget.org/packages/Akov.DataGenerator/">Akov.DataGenerator</a>.
 
 <pre><code class="language-cs">public class UIntGenerator : GeneratorBase
 {
@@ -62,6 +64,4 @@ Console.WriteLine(dg.Execute("data.json"));
 
 </code></pre>
 
-Using <code>GetRandomInstance</code> with passing <code>nameof(method)</code> into it will return the unique <code>Random</code> instance. If there was just one instance used in the application then it would not be possible to achieve correct random distribution for each property.
-
-Just a note. It is not mandatory to use the <code>DG</code> runner. If you need just to generate data, then you can call the <code>CreateData</code> method of the <code>DataProcessor</code> class.
+Calling the `GetRandomInstance` method, and passing `nameof(method)` as a parameter, should return the unique `Random` instance. Please do use it, rather than create your own `Random` object, as in this case, the randomness of the data will be lost at some extent.
