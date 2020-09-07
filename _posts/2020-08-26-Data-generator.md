@@ -5,10 +5,17 @@ category: blogs
 tag: Data Generator 
 ---
 
-The idea behind this post is to show how specific test data can be easily prepared using the <a href="https://github.com/akovanev/DataGenerator/">DataGenerator</a>.
+Let me introduce the <a href="https://github.com/akovanev/DataGenerator/">Akov.DataGenerator</a>.
 
-Here is a simple example of models.
+Its <a href="https://github.com/akovanev/DataGenerator/blob/master/Akov.DataGenerator/Processors/DataProcessor.cs">DataProcessor</a> class creates random data based on the <a href="https://github.com/akovanev/DataGenerator/blob/master/Akov.DataGenerator/Scheme/DataScheme.cs">DataScheme</a>.
 
+There are two ways of how to populate the `DataScheme`. 
+* Using json.
+* Using the attributes from the `Akov.DataGenerator.Attributes` namespace.
+
+In this article I will focus on the approach with json, while the attributes will be described later. 
+
+Lets suppose that there exists the couple of models.
 <pre><code class="language-cs">class Product
 {
     public string Name {get; set;}
@@ -22,7 +29,18 @@ class Sku
     public decimal Price {get; set;}
 }</code></pre>
 
-Now I want to show how the data should be described in the <code>DataGenerator</code> input json. Basically the json consists of the <code>root</code> property and the <code>definitions</code>.  
+As a developer, I want to generate one hundred products. It is expected that the `Product.Name`, is just like the `Sku.Name`, should contain only symbols `[a-z0-9]`. There are some additional restictions on the length. The other properties, `LastUpdated` and `Price`, expect data in some ranges.
+
+The main idea behind the <code>DataGenerator</code> is that it should be possible to generate not only the correct data. The several types of failures were added in the current version. 
+* *null* result.
+* *Out of range* result.
+* Custom failure.
+
+The logic for the first two is more or less implemented, but it is better to override the result of custom errors. For now this is a string constant returning some error text.
+
+For every property that requires a failure, the probability in the range `(0,1)` should be specified.
+
+Lets take a look at the example.
 
 <pre><code class="language-cs">{
   "root": "Root",
@@ -112,12 +130,17 @@ Now I want to show how the data should be described in the <code>DataGenerator</
   ]
 }</code></pre>
 
-The root value specifies the enrty definition name. Every definition may point to other ones, there should not be circular references though. 
+The `root` value `"Root"` specifies the `name` of the definition to entry. Every definition consists of a list of properties that may point to other definitions.There should not be circular references though. 
 
-Every property must have the <code>Type</code> value not empty. If the type is <code>array</code> or <code>object</code> then the <code>pattern</code> should be mandatory filled and reference to the definition in the file. For all the other types the default values are usually predefined. 
+There are some attributes, like the `name` and `type`, that should be mandatory filled. For arrays and objects, and in some other cases, the `pattern` is also required. More information can be found on the project repository on <a href="https://github.com/akovanev/DataGenerator">GitHub</a>.
 
-A property may have also a list of settings like <code>minValue</code> or <code>maxSpaceCount</code>. Apart of that, the <code>failure</code> object describes  probabilities of happening a specific failure. In this way you can easily control inconsitent data and their nature.
+The code below shows the entire process.
+<pre><code class="language-cs">var dg = new DG();
+DataScheme scheme = dg.GetFromFile("data.json");
+string output = dg.GenerateJson(scheme);
+dg.SaveToFile("data.out.json", output);
+</code></pre>
 
-The result should look similar to the the screenshot taken from the <a href="https://github.com/akovanev/DataGenerator/">JSON Editor Online</a> tool.
+The result should be similar as on my screenshot taken from the <a href="https://github.com/akovanev/DataGenerator/">JSON Editor Online</a> tool.
 
 <img src="/public/datagen.png">
