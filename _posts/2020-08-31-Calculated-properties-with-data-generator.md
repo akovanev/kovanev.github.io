@@ -1,6 +1,8 @@
 ---
 layout: post
-title: Calculated Properties with Data Generator 
+title: Calculated Properties with Data Generator
+category: blogs 
+tag: Data Generator 
 ---
 
 In the previous posts about <a href="/2020/08/26/Data-generator">Data Generator</a> and <a href="/2020/08/27/Custom-data-generator">Custom Data Generator</a> I described a couple of simple scenarios for random test data generation.

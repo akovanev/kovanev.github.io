@@ -1,6 +1,8 @@
 ---
 layout: post
-title: When Async Code Becomes Sync 
+title: When Async Code Becomes Sync
+category: blogs 
+tag: Asynchronous Programming and Multithreading
 ---
 
 Hopefully you know that a method marked as <code>async</code> does not need to be executed *asynchronously*. 

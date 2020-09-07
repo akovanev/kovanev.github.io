@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Max Degree of Concurrency 
+category: blogs
+tag: Asynchronous Programming and Multithreading
 ---
 
 In the previous article <a href="/2020/07/30/Exception-handling-for-tasks-running-in-parallel">Exception Handling for Tasks Running in Parallel</a> it was suggested how to safely work with multiple tasks running in parallel. In some situations it is additionally required to limit a number of tasks that may run simultaneously. In other words, the maximum degree of concurrency should be set for a collection of tasks. 

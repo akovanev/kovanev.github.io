@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Counter of Working Threads 
+category: blogs
+tag: Asynchronous Programming and Multithreading
 ---
 
 When you need to get the number of active threads, it seems natural to start with the <code>ThreadPool.ThreadCount</code> property.

@@ -5,7 +5,8 @@ description:         'Here I would like to talk about .net framework focusing mo
 url:                 
 baseurl:             ''
 paginate:            5
-permalink:           pretty
+paginate_path:       "/blogs/page:num/"
+
 
 # About/contact
 author:

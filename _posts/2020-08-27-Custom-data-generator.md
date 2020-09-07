@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Custom Data Generator 
+category: blogs
+tag: Data Generator 
 ---
 
 In the previous post about <a href="/2020/08/26/Data-generator">Data Generator</a> I described how to get random test data.

@@ -1,6 +1,8 @@
 ---
 layout: post
 title: How to Sanitize Sensitive Data
+category: blogs
+tag: Sanitizing Data
 ---
 
 As soon as it becomes necessary to store/log some user data, there can be a need to extract all *sensitive* information. 

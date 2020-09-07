@@ -1,6 +1,8 @@
 ---
 layout: post
-title: Data Generator 
+title: Data Generator
+category: blogs
+tag: Data Generator 
 ---
 
 The idea behind this post is to show how specific test data can be easily prepared using the <a href="https://github.com/akovanev/DataGenerator/">DataGenerator</a>.

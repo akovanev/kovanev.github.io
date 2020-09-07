@@ -1,6 +1,8 @@
 ---
 layout: post
 title: How to Log Metrics on Different Environments
+category: blogs
+tag: Logging
 ---
 
 If an application has long-running tasks then it rarely goes without obtaining some measurements. If it is not a local environment then the good question is whether the execution of the measurement code itself may affect performance or cause some other issues. 

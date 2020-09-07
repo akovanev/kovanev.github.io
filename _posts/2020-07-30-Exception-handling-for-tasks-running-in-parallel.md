@@ -1,6 +1,8 @@
 ---
 layout: post
-title: Exception Handling for Tasks Running in Parallel 
+title: Exception Handling for Tasks Running in Parallel
+category: blogs 
+tag: Asynchronous Programming and Multithreading
 ---
 
 Many developers have a fear of missing something while handling exceptions that can arise when multiple tasks are executed in parallel.

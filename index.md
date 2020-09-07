@@ -1,0 +1,20 @@
+---
+layout: default
+title: Home
+---
+
+
+{% for tag in site.tags reversed %}
+  <h3 >{{ tag[0] }}
+  {% if tag[0] == "Data Generator" %}
+    <a href="https://www.nuget.org/packages/Akov.DataGenerator/"><img style="display: inline; margin:0" src="https://img.shields.io/nuget/v/Akov.DataGenerator"></a>
+    <a href="https://www.nuget.org/packages/Akov.DataGenerator/"><img style="display: inline; margin:0" src="https://img.shields.io/nuget/dt/akov.datagenerator"></a>
+    <a href="https://github.com/akovanev/DataGenerator"><img style="display: inline; margin:0" src="https://img.shields.io/github/last-commit/akovanev/datagenerator"></a>
+  {% endif %}
+  </h3>
+  <ul>
+    {% for post in tag[1] %}
+      <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+  </ul>
+{% endfor %}
