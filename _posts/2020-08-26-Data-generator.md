@@ -141,6 +141,6 @@ string output = dg.GenerateJson(scheme);
 dg.SaveToFile("data.out.json", output);
 </code></pre>
 
-The result should be similar as on my screenshot taken from the <a href="https://github.com/akovanev/DataGenerator/">JSON Editor Online</a> tool.
+The result should be similar as on my screenshot taken from the <a href="https://jsoneditoronline.org/">JSON Editor Online</a> tool.
 
 <img src="/public/datagen.png">

@@ -5,7 +5,7 @@ category: blogs
 tag: Asynchronous Programming and Multithreading
 ---
 
-When you need to get the number of active threads, it seems natural to start with the <code>ThreadPool.ThreadCount</code> property.
+When you need to get the number of active threads, it seems natural to start with the `ThreadPool.ThreadCount` property.
  
  According to the description, the <a href="https://docs.microsoft.com/en-us/dotnet/api/system.threading.threadpool.threadcount">ThreadPool.ThreadCount</a>
  > Gets the number of thread pool threads that currently exist.

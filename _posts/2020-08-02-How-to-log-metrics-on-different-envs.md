@@ -9,7 +9,7 @@ If an application has long-running tasks then it rarely goes without obtaining s
 
 After making a decision what should be measured, another question - how to log the data. In general, the logging strategy may vary depending not only on an environment itself but also taking into account an object type, a running method and so on.
 
-For such tasks, it is common to create an *auxiliary class* encapsulating the logic of work with a standard framework feature. Something like the <code>StopwatchHelper</code>. While a logger is just being injected in that *auxiliary*.
+For such tasks, it is common to create an *auxiliary class* encapsulating the logic of work with a standard framework feature. Something like the `StopwatchHelper`. While a logger is just being injected in that *auxiliary*.
 
 There are a couple of problems this approach has. The first is how to control if the *auxiliary* method is allowed to be executed on the specific environment. The second, if the answer on the previos question was yes - should it log the data in the same way as on other environments or differently. 
 
@@ -60,11 +60,11 @@ In the example below the *auxiliary* does not log anything. Besides, the *if-els
     }
 }</code></pre>
 
-Apart of managing the <code>Stopwatch</code>, the <code>MetricsWatcher</code> has an option to measure the memory which is currently in use. The <code>MetricsWatcher</code> does not know anything about the way how its data will be processed, formatted, logged. The important thing it should do is raise an event when the state is considered to be captured.
+Apart of managing the `Stopwatch`, the `MetricsWatcher` has an option to measure the memory which is currently in use. The `MetricsWatcher` does not know anything about the way how its data will be processed, formatted, logged. The important thing it should do is raise an event when the state is considered to be captured.
 
-Using the <code>EventHandler</code> instead of a custom delegate is not mandatory but preferable for work with the <a href="https://github.com/dotnet/reactive">Reactive Extensions</a>. That, in turn, provides more flexibility on the event-based approach.
+Using the `EventHandler` instead of a custom delegate is not mandatory but preferable for work with the <a href="https://github.com/dotnet/reactive">Reactive Extensions</a>. That, in turn, provides more flexibility on the event-based approach.
 
-The missing implementation of the two other classes <code>MetricsWatcherArgs</code> and <code>MetricsWatcherOptions</code> is very straightforward.
+The missing implementation of the two other classes `MetricsWatcherArgs` and `MetricsWatcherOptions` is very straightforward.
 <pre><code class="language-cs">public class MetricsWatcherArgs : EventArgs
 {
     public MetricsWatcherArgs(
@@ -99,7 +99,7 @@ public class MetricsWatcherOptions
 
 Once the part above is understandable, the next step is introduce a factory that will be responsible for creating a watcher with the determined way of how to process the metrics. 
 
-The *if-else* logic for setting loggers up can be added here. Bear in mind also that the code in the watcher <code>Capture</code> method will execute only if there is at least one handler set. In other words, for unwanted calculations on a production environment the handler should be just not set.
+The *if-else* logic for setting loggers up can be added here. Bear in mind also that the code in the watcher `Capture` method will execute only if there is at least one handler set. In other words, for unwanted calculations on a production environment the handler should be just not set.
 
 <pre><code class="language-cs">public class MetricsWatcherFactory
 {

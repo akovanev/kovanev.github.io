@@ -32,10 +32,8 @@ layout: default
     {% if sameTagCount >= minCommonTags %}
       <li>
         <h4>
-          <a href="{{ site.baseurl }}{{ post.url }}">
-            {{ post.title }}
-            <small>{{ post.date | date_to_string }}</small>
-          </a>
+          <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+          <small>{{ post.date | date_to_string }}</small>
         </h4>
       </li>
         {% assign maxRelatedCounter = maxRelatedCounter | plus: 1 %}
