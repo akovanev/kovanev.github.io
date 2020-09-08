@@ -63,11 +63,21 @@ public class Sanitizer
     }
 }</code></pre>
 
-After the desired behavior defined, the next step is implement how the CLR gets all meta information. The `SanitizeReflector` will be executing the search on an array of assemblies passing to the `Collect` method as a parameter. 
+After the desired behavior defined, the next step is to implement how the CLR will get all meta information. For that the `SanitizeReflector` will be executing the search on all assemblies that may have classes marked with the `Sanitized` attribute. 
 
 <pre><code class="language-cs">public class SanitizeReflector
 {
-    public Dictionary<string, SanitizePatternType> Collect(Assembly[] assemblies)
+    private readonly Lazy<Dictionary<string, SanitizePatternType>> _sanitizeDictionary;
+    
+    public SanitizeReflector(Assembly[] assemblies)
+    {
+        _sanitizeDictionary = new Lazy<Dictionary<string, SanitizePatternType>>(
+            () => Collect(assemblies));
+    }
+
+    public Dictionary<string, SanitizePatternType> SanitizeDictionary => _sanitizeDictionary.Value;
+    
+    private Dictionary<string, SanitizePatternType> Collect(Assembly[] assemblies)
     {
         var dictionary = new Dictionary<string, SanitizePatternType>();
 
@@ -100,9 +110,7 @@ After the desired behavior defined, the next step is implement how the CLR gets 
     }
 }</code></pre>
 
-Obviously, this method does not have to run on each request due to performance reasons. In other words, the result should be stored in memory.
-
-The `JsonSanitizeService`, based on regex, represents just one of the ways, probably not the fastest, of handling the specific json data.
+At last, the `JsonSanitizeService`, based on regex, represents just one of the ways, probably not the fastest, of handling the specific json data.
 <pre><code class="language-cs">public class JsonSanitizeService
 {
     private const string JsonPatternTemplate = @"""{0}""\s*:\s*([""'])(?:(?=(\\?))\2.)*?\1";
@@ -113,7 +121,7 @@ The `JsonSanitizeService`, based on regex, represents just one of the ways, prob
 
     public JsonSanitizeService(SanitizeReflector reflector, Sanitizer sanitizer)
     {
-        _sanitizeDictionary = reflector.Collect(AppDomain.CurrentDomain.GetAssemblies());
+        _sanitizeDictionary = reflector.SanitizeDictionary;
         _sanitizer = sanitizer;
     }
 
@@ -144,7 +152,7 @@ The `JsonSanitizeService`, based on regex, represents just one of the ways, prob
 }</code></pre>
 
 Finally, the test code looks simple.
-<pre><code class="language-cs">static SanitizeReflector _reflector = new SanitizeReflector();
+<pre><code class="language-cs">static
 
 static void Main(string[] args)
 {
@@ -159,8 +167,9 @@ static void Main(string[] args)
 
     string json = JsonSerializer.Serialize(card);
 
+    var reflector = new SanitizeReflector(AppDomain.CurrentDomain.GetAssemblies());
     var sanitizer = new Sanitizer();
-    var service = new JsonSanitizeService(_reflector, sanitizer);
+    var service = new JsonSanitizeService(reflector, sanitizer);
 
     Console.WriteLine(service.ReplaceSensitiveData(json));
 }</code></pre>
