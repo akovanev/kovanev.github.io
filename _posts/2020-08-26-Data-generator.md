@@ -13,7 +13,7 @@ There are two ways of how to populate the `DataScheme`.
 * Using json.
 * Using the attributes from the `Akov.DataGenerator.Attributes` namespace.
 
-In this article I will focus on the approach with json, while the attributes will be described later. 
+In this article I will focus on the approach with json, while the attributes will be described later in <a href="/blogs/2020/09/07/Data-generator-attributes">Data Generator Attributes</a>. 
 
 Lets suppose that there exists the couple of models.
 <pre><code class="language-cs">class Product

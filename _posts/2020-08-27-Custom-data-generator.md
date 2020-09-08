@@ -31,7 +31,7 @@ Let add the `uint` type.
 ]
 </code></pre>
 
-After having updated the json input, the next should be creating the `UIntGenerator` class. Do not forget to include the reference to the <a href="https://www.nuget.org/packages/Akov.DataGenerator/">Akov.DataGenerator</a>.
+After having updated the json input, the next action is to create the `UIntGenerator` class. Do not forget to include the reference to the <a href="https://www.nuget.org/packages/Akov.DataGenerator/">Akov.DataGenerator</a>.
 
 <pre><code class="language-cs">public class UIntGenerator : GeneratorBase
 {
