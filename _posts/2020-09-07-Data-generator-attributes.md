@@ -18,6 +18,8 @@ Cons:
 * The dto/model may look overloaded with the generator attributes.
 * Any deserialization onto the dto/model, based on reflection, might be a little longer, as the amount of properties attributes is increased.
 
+Another way is to create a separate class that will participate only in the data generation. I prefer to start naming such classes with the prefix `Dg`.
+
 The `DgStudentCollection` represents a class that is supposed to have some random data generated. Despite you may see a lot of attributes above the properties, even if a class doesn't have any, it is still possible to generate the data for it using the defaults.  
 
 <pre><code class="language-cs">public class DgStudentCollection
