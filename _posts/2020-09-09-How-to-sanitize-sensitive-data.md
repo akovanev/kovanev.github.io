@@ -84,6 +84,7 @@ For the example above with the `Card` let's create a demo.
 
 string json = JsonConvert.SerializeObject(card);
 
+var _sanitizerService= new SanitizerService(new []{typeof(Card).Assembly});
 string sanitizedData = _sanitizerService.ReplaceSensitiveData(json);
 
 Console.WriteLine(sanitizedData);
