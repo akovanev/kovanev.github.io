@@ -11,6 +11,10 @@ title: Home
     <a href="https://www.nuget.org/packages/Akov.DataGenerator/"><img style="display: inline; margin:0" src="https://img.shields.io/nuget/v/Akov.DataGenerator"></a>
     <a href="https://www.nuget.org/packages/Akov.DataGenerator/"><img style="display: inline; margin:0" src="https://img.shields.io/nuget/dt/akov.datagenerator"></a>
   {% endif %}
+  {% if tag[0] == "Sanitizer" %}
+    <a href="https://github.com/akovanev/Sanitizer"><img style="display: inline; margin:0" src="/public/GitHub-Mark-32px.png"></a>
+    <a href="https://www.nuget.org/packages/Akov.Sanitizer/"><img style="display: inline; margin:0" src="https://img.shields.io/nuget/v/Akov.Sanitizer"></a>
+  {% endif %}
   </h3>
   <ul>
     {% for post in tag[1] %}
