@@ -11,7 +11,7 @@ Let me introduce the [Akov.Sanitizer](https://github.com/akovanev/Sanitizer/), a
 
 If the data are bound/deserialized into some class instance, then the class can deal with sensitive information itself. However, in ASP.NET MVC and API projects, there is a gap between receiving the request and the moment when the data arrived at the controller. On this way the data can be validated, for example using fluent validation, and it is possible that they will not reach the controller at all. 
 
-At the same time, it can be important for the project to log the request information including the payload, but having extracted all the sensitive part. At this point the binding type is not known yet, but we still have to deal with data. Of course it might be doable to find the certain type in each particular case, but mantaining such code can be very difficult.
+At the same time, it can be important for the project to log the request information including the payload, but having extracted all the sensitive part. At this point the binding type is not known yet, but we still have to deal with data. Of course it might be doable to find the certain type in each particular case, but maintaining such code can be very difficult.
 
 From another side, having just data in some text format may not give us enough information to act. It would be preferable if we could know at least the name of the binding type. But, for instance, if the request contains a json, it is quite common if the name of the entry, in our case binding type, is missing. 
 
