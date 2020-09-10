@@ -60,7 +60,7 @@ There are two supported out of the box:
 
 It is quite easy to create a custom one. For this:
 
-1. It should be derived from the * [SanitizerBase](https://github.com/akovanev/Sanitizer/blob/master/Akov.Sanitizer/Sanitizers/SanitizerBase.cs). 
+1. It should be derived from the [SanitizerBase](https://github.com/akovanev/Sanitizer/blob/master/Akov.Sanitizer/Sanitizers/SanitizerBase.cs). 
 
 2. A custom factory extending the [SanitizerFactory](https://github.com/akovanev/Sanitizer/blob/master/Akov.Sanitizer/Sanitizers/SanitizerFactory.cs) should be added.
 
@@ -107,7 +107,8 @@ public class SanitizedProperties
     [ReplaceFor(typeof(AsteriskSanitizer))]
     public string? Cvc { get; set; }
 
-    [ReplaceFor(typeof(PartialSanitizer), propertyName:"Line1", pattern: "4,0,*")]
+    [ReplaceFor(typeof(PartialSanitizer), 
+        propertyName:"Line1", pattern: "4,0,*")]
     public string? AddressLine1 { get; set; }
 }
 </code></pre>
