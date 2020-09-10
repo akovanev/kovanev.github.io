@@ -13,21 +13,21 @@ If the data are already bound/deserialized into some class instance, then that c
 
 At the same time, it can be important for the project to log every request, having preliminarily extracted all the sensitive part. As we can not be sure that the request will reach the controller, then we should act on some middleware layer. At the point the *binding type* is not known yet. Of course it might be doable to find it, but that doesn't look like a good and maintainable solution.
 
-Let's then focus on the request. It would be preferable if we could know from it at least the name of the *binding type*. Unfortunatley, it is not a general case. For instance, if the request payload is a json, then the name of the entry, in our case the *binding type*, will mostly be missing. 
+Let's then focus on the request. It would be preferable if we could know from it at least the name of the *binding type*. Unfortunatley, this is not a general case. For instance, if the request payload is a json, then the name of the entry, in our case the *binding type*, will mostly be missing. 
 
-That, in turn, leads to some other issues. Let's assume that we can implement a solution based on property names only. That might make perfect sense, as we have to extract the sensitive data from the properties but not from the objects. But what if we have more than one property with the same name in our request models? How to find the right one and apply its replacement pattern, if it exists?
+That, in turn, leads to some other issues. Let's assume that we can implement a solution based on the property names only. That might make perfect sense, as we have to extract the sensitive data from the properties but not from the objects. But what if we have more than one property with the same name in our request models? How to find the right one and apply its replacement pattern, if it exists?
 
 That is challenging. The solution can be found if we agree that the names for the *sensitive* properties should inherit the same pattern for all request models.
 
-In other words, if there is the property `Number` within the `Card` and it is sensitive, then the same named property, but within the `Room`, should be sensitive as well. If it doesn't make sense for the `Room`, then the easiest solution is to rename the first property, for instance, to the `CardNumber`.
+In other words, if there is the property `Number` within the `Card` and it is sensitive, then the same named property, but within the `Room`, should be sensitive as well. If it doesn't make sense for the `Room`, then the easiest solution is to rename the first property, for instance, making it the `CardNumber`.
 
 Despite this approach imposes restrictions, it is still helpful in the context of the problem.
 
 ### The solution
 
-If the previous part was accepted, than let's go ahead to the solution.
+If the previous part is accepted, than let's go ahead to the solution.
 
-In the example below the card object is considered to be sanitized. The nuget package page is available [here](https://www.nuget.org/packages/Akov.Sanitizer/).
+In the example below the card object is considered to be sanitized. The nuget package is available [here](https://www.nuget.org/packages/Akov.Sanitizer/).
 <pre><code class="language-cs">[Sanitized]
 public class Card
 {
@@ -50,21 +50,21 @@ public class Card
 }
 </code></pre>
 
-Each type, which is supposed to be sanitized, should be marked with the `[Sanitized]` attribute. The `[ReplaceFor]` shows that a property requires sanitizing done by the specific sanitizer class. 
+Each type, which properties define the replacement patterns using the `[ReplaceFor]`, should be marked with the `[Sanitized]` attribute. 
 
-There are two supported out of the box: 
+There are two sanitizer types for the `[ReplaceFor]` out of the box: 
 
 * [AsteriskSanitizer](https://github.com/akovanev/Sanitizer/blob/master/Akov.Sanitizer/Sanitizers/AsteriskSanitizer.cs)
 
 * [PartialSanitizer](https://github.com/akovanev/Sanitizer/blob/master/Akov.Sanitizer/Sanitizers/PartialSanitizer.cs)
 
-It is quite easy to create a custom one. For this:
+However, if needed, it is quite easy to add a custom one. For this:
 
 1. It should be derived from the [SanitizerBase](https://github.com/akovanev/Sanitizer/blob/master/Akov.Sanitizer/Sanitizers/SanitizerBase.cs). 
 
 2. A custom factory extending the [SanitizerFactory](https://github.com/akovanev/Sanitizer/blob/master/Akov.Sanitizer/Sanitizers/SanitizerFactory.cs) should be added.
 
-For the example above with the `Card` let's create a demo.
+Now, for the example with the `Card`, let's write some demo code.
 
 <pre><code class="language-cs">var card = new
 {
