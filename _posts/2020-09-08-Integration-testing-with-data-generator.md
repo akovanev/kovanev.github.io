@@ -15,9 +15,9 @@ Let's suppose that we have a service working with students.
 }
 </code></pre>
 
-Let's aslo assume that the middleware is still under development. So the return data may have a lot of issues, including missing properties, the wrong format  etc. I'd like the service to be written in such a way that all the consistent data is proceeded to a higher level, while all the issues will be logged.
+Let's aslo assume that the middleware is still under development. So the returned data may have a lot of problems, including missing properties, the wrong format  etc. I'd like the service to be written in such a way that all consistent data is pushed to a higher level, while all the issues will be logged.
 
-I expect that the response data to be in json, and all of the dto's will derive from the following class.
+I expect the response data to be in json, and all of the dto's will derive from the following class.
 
 <pre><code class="language-cs">abstract class Result
 {
@@ -55,7 +55,7 @@ I expect that the response data to be in json, and all of the dto's will derive 
 }
 </code></pre>
 
-Probably the `Result` is not perfect. It has dependencies of `JsonConvert`, which I would avoid in real life, but for my example I find it good enough. The main idea is to add the couple of objects to store errors and warnings on that level, and keep it simple. 
+In the example, the `Result` class encapsultes error and warning logic. It relies on the `JsonConvert` implemetation and this part should probably be improved. I was just trying to keep it simple. 
 
 Here is the example of a dto class
 <pre><code class="language-cs">class Student : Result
@@ -157,11 +157,11 @@ class ApiClient
 }
 </code></pre>
 
-If everything is implemented right, then the `ApiClient` should not throw exceptions except the network issues. `JsonConvert.DeserializeObject<T>` is supposed to give control to the `[OnError]` methods for all the response objects that had parsing problems.
+If everything is correct, then the `ApiClient` should not throw exceptions aside from the network issues. The `JsonConvert.DeserializeObject<T>` will be looking for all the `[OnError]` methods for all the response objects that have parsing problems.
 
-If this part is understandable then I will go ahead to creating a test solution. I will not put all the code here, focusing only on main aspects.
+If this part is clear, then I will move on to creating a test solution. I will not post all the code here, focusing only on the main aspects.
 
-First I need to mock the responses with the generated data. For that I will create the `MockHttpClientFactory`.
+First, I need to replace the responses, received from the `HttpClient`, with the generated data. For that I will create the `MockHttpClientFactory`.
 
 <pre><code class="language-cs">class MockHttpClientFactory
 {
@@ -244,8 +244,6 @@ Afterwards, I am ready to write a test.
 }
 </code></pre>
 
-During testing, I have noticed that the code may not run so fast in the debug mode. Probably it could be found a better solution instead of using the `JsonConvert`. I will continue investigating this. 
-
-Anyways, I believe that the approach I have shown here is clear. Having implemented it, I can be sure that both correct and inconsistent data will be handled in the safe way.
+Now I can be sure that both correct and inconsistent data will be handled in the proper way.
 
 The entire code may be taken from the <a href="https://github.com/akovanev/DataGenerator/tree/master/Akov.DataGenerator.Demo">Akov.DataGenerator.Demo</a>.
