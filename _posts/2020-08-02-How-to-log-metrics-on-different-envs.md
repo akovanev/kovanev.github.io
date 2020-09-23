@@ -5,9 +5,9 @@ category: blogs
 tag: Logging
 ---
 
-If an application has long-running tasks then it rarely goes without obtaining some measurements. If it is not a local environment then the good question is whether the execution of the measurement code itself may affect performance or cause some other issues. 
+If an application has long-running tasks then it rarely goes without obtaining some measurements. If it is not a local environment then a good question is whether the execution of the measurement code itself may affect performance or cause some other issues. 
 
-After making a decision what should be measured, another question - how to log the data. In general, the logging strategy may vary depending not only on an environment itself but also taking into account an object type, a running method and so on.
+After making a decision what should be measured, another question is how to log the data. In general, the logging strategy may vary depending not only on an environment itself but also taking into account an object type, a running method and so on.
 
 For such tasks, it is common to create an *auxiliary class* encapsulating the logic of work with a standard framework feature. Something like the `StopwatchHelper`. While a logger is just being injected in that *auxiliary*.
 

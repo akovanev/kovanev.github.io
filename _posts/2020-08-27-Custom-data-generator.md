@@ -7,7 +7,7 @@ tag: Data Generator
 
 In the previous post about <a href="/blogs/2020/08/26/Data-generator">Data Generator</a> I described how to generate the random data.
 
-If there is a need to add a custom type, there is a pretty simple way how to solve this issue.
+If it is necessary to add a custom type, here is a pretty simple way how to do this.
 
 Let add the `uint` type.
 
