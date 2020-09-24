@@ -27,7 +27,7 @@ The `DgStudentCollection` represents a class that is supposed to have some rando
     [DgCalc]
     public int? Count { get; set; }
 
-    [DgLength(Max = 100)]
+    [DgLength(Min = 100, Max = 100)]
     public &lt;DgStudent&gt;? Students { get; set; }
 }
 
