@@ -5,22 +5,22 @@ category: blogs
 tag: Data Generator 
 ---
 
-In the fisrt post about <a href="/blogs/2020/08/26/Data-generator">Data Generator</a> I described the scenario when the `DataScheme` is populated from a json input. Another way to get the `DataScheme` is by adding the attributes from the `Akov.DataGenerator.Attributes` namespace to dto/model properties. This option is available since the generator version 1.3.
+In the fisrt post about <a href="/blogs/2020/08/26/Data-generator">Data Generator</a> I described the scenario when the `DataScheme` is populated from a json input. Another way to get the `DataScheme` is by adding the attributes from the `Akov.DataGenerator.Attributes` to dto/model properties. This option is available since the generator version 1.3.
 
-Let's suppose that we have a model called `Student`. If it is accepatable to mark its properties with the `Dg` attributes, then we can just do this. 
+Let's suppose that we have a model called `Student`. If it is acceptable to mark its properties with the `Dg` attributes, then we can just do this. 
 
 Pros:
 
-* If the dto/model class has changed, the data generation process doesn't require additional changes. So you will be sure that everything is up to date.
+* If a dto/model class has changed, the data generation process doesn't require additional changes. So you will be sure that everything is up to date.
 
 Cons:
 
-* The dto/model may look overloaded with the generator attributes.
-* Any deserialization onto the dto/model, based on reflection, might be a little longer, as the amount of properties attributes is increased.
+* A dto/model may look overloaded with the `Dg` attributes.
+* Any deserialization onto a dto/model, based on reflection, may take a little longer.
 
-Another way is to create a separate class that will participate only in the data generation process. I prefer to start naming such classes with the prefix `Dg`.
+Another way to achieve the same result is to create a separate class that will participate only in the generation process. I prefer to start naming such classes with the prefix `Dg`.
 
-The `DgStudentCollection` represents a class that is supposed to have some random data generated. Despite you may see a lot of attributes above the properties, even if a class doesn't have any, it is still possible to generate the data for it using the defaults.  
+The `DgStudentCollection` represents the student collection model. Despite you may see a lot of attributes above the properties, even if a class doesn't have any, it is still possible to generate the data using the defaults.  
 
 <pre><code class="language-cs">public class DgStudentCollection
 {
