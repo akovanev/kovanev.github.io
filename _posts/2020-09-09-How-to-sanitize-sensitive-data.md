@@ -11,11 +11,11 @@ tag: Sanitizer
 
 If the data is bound/deserialized into a class instance, then the class can decide what should be done with sensitive information. However, in ASP.NET MVC and Web API projects, there is a gap between receiving the request and the moment when the data arrived at the controller. On this way, the data can be validated, rejected, and it is quite possible that it will not reach the controller. 
 
-At the same time, it can be important for a project to log every request, having preliminarily extracted all the sensitive part. As we can not be sure that  requests will reach a controller, then we should act on the middleware layer. At this point the *binding type* is not known yet. 
+At the same time, it can be important to log every request, having preliminarily extracted all the sensitive part. As we can not be sure that  requests will reach a controller, then we should act on the middleware layer. At this point the *binding type* is not known yet. 
 
 It would be preferable if we could know at least the name of the *binding type*. Unfortunatley, this is not a general case. For instance, if the request payload is a json, then the name of the entry, in our case the *binding type*, will mostly be missing. 
 
-That, in turn, leads to some other issues. Let's assume that we can implement a solution based on the property names only. That might make perfect sense, as we have to extract the sensitive data from the properties but not from the objects. But if we have more than one property with the same name in different request models, then how to find the right one to apply its replacement pattern?
+That, in turn, leads us to some other issues. Let's assume that we can implement a solution based on the property names only. That makes perfect sense, as we have to extract the sensitive data from the properties but not from the objects. But if we have more than one property with the same name in different request models, then how to find the right one to apply its replacement pattern?
 
 That is challenging. The solution can be found if we agree that the names for the *sensitive* properties should inherit the same pattern for all request models.
 
