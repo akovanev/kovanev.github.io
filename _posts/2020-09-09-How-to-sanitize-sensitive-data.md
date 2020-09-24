@@ -13,13 +13,13 @@ If the data is bound/deserialized into a class instance, then the class can deci
 
 At the same time, it can be important to log every request, having preliminarily extracted all the sensitive part. As we can not be sure that  requests will reach a controller, then we should act on the middleware layer. At this point the *binding type* is not known yet. 
 
-It would be preferable if we could know at least the name of the *binding type*. Unfortunatley, this is not a general case. For instance, if the request payload is a json, then the name of the entry, in our case the *binding type*, will mostly be missing. 
+It would be preferable if we could know at least the *binding type* name. Unfortunatley, this is not a general case. For instance, if the request payload is a json, then the name of the entry, in our case the *binding type*, will mostly be missing. 
 
-That, in turn, leads us to some other issues. Let's assume that we can implement a solution based on the property names only. That makes perfect sense, as we have to extract the sensitive data from the properties but not from the objects. But if we have more than one property with the same name in different request models, then how to find the right one to apply its replacement pattern?
+That, in turn, leads us to some other issues. Let's assume that we can implement a solution based on the property names only. That makes sense, as we have to extract the sensitive data from the properties but not from the objects. But if we have more than one property with the same name in different request models, then how to find the right one to apply its replacement pattern?
 
 That is challenging. The solution can be found if we agree that the names for the *sensitive* properties should inherit the same pattern for all request models.
 
-In other words, if there is a property called `Number` within the `Card`, and it is sensitive, then the same named property, but within the `Room` must sutisfy the same rules. As it doesn't make sense for the `Room`, then the easiest solution is to rename the `Number` property, for instance, we can name it `CardNumber`.
+In other words, if there is a property called `Number` within the `Card`, and it is sensitive, then the same named property, but within the `Room` must sutisfy the same rules. As it doesn't make sense for the `Room`, then the easiest solution is to rename the `Number` property. For instance, we can name it `CardNumber`.
 
 Despite this approach imposes restrictions, it is still helpful in the issue context.
 
@@ -50,7 +50,7 @@ public class Card
 }
 </code></pre>
 
-Each type, which properties define the replacement patterns using the `[ReplaceFor]`, should be marked with the `[Sanitized]` attribute. 
+Each type containing sensitive properties should be marked with the `[Sanitized]` attribute. 
 
 There are two sanitizer types for the `[ReplaceFor]` out of the box: 
 
@@ -93,7 +93,7 @@ Console.WriteLine(sanitizedData);
 The output is.
 <pre><code class="nohighlight">{"CardholderName": "@@@@@@","cardNumber": "1234********3456","month":1,"year":2050,"Cvc": "***","address":{"Line1": "stre****","line2":"","city":"Prague","country":"Chechia"}}</code></pre>
 
-Just a note. Technically, since we agreed that the same-named properties should behave accordingly, it is also possible to collect them all in one place. It is one hundred percent up to you.
+Just a note. Technically, since we agreed that the same-named properties should behave accordingly, it is also possible to collect them all in one place. 
 
 <pre><code class="language-cs">[Sanitized]
 public class SanitizedProperties
