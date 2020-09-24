@@ -5,9 +5,9 @@ category: blogs
 tag: Data Generator 
 ---
 
-In the fisrt post about <a href="/blogs/2020/08/26/Data-generator">Data Generator</a> I described the scenario when the `DataScheme` is populated from a json input. Another way to get the `DataScheme` is by creating new or updating the existing classes in some solution. This option is available since the generator version 1.3.
+In the fisrt post about <a href="/blogs/2020/08/26/Data-generator">Data Generator</a> I described the scenario when the `DataScheme` is populated from a json input. Another way to get the `DataScheme` is by adding the attributes from the `Akov.DataGenerator.Attributes` namespace to dto/model properties. This option is available since the generator version 1.3.
 
-Let's suppose that we have a dto/model class called `Student`. It is accepatable to mark its properties with attributes from the `Akov.DataGenerator.Attributes` namespace. In this case the data generation process will be done for the type/class which also has another responsibility, being a dto/model object.
+Let's suppose that we have a model called `Student`. If it is accepatable to mark its properties with the `Dg` attributes, then we can just do this. 
 
 Pros:
 
@@ -18,7 +18,7 @@ Cons:
 * The dto/model may look overloaded with the generator attributes.
 * Any deserialization onto the dto/model, based on reflection, might be a little longer, as the amount of properties attributes is increased.
 
-Another way is to create a separate class that will participate only in the data generation. I prefer to start naming such classes with the prefix `Dg`.
+Another way is to create a separate class that will participate only in the data generation process. I prefer to start naming such classes with the prefix `Dg`.
 
 The `DgStudentCollection` represents a class that is supposed to have some random data generated. Despite you may see a lot of attributes above the properties, even if a class doesn't have any, it is still possible to generate the data for it using the defaults.  
 
