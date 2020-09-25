@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Single Status Codes Strategy
+title: Single Strategy for Retrieving Response Status Codes 
 category: blogs
 tag: Microservices
 ---
