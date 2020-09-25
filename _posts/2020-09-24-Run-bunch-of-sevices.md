@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Run Microservices Solution with PowerShell
+title: Run Bunch of Services with PowerShell Locally
 category: blogs
 tag: Microservices
 ---
