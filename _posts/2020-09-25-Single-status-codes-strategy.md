@@ -51,10 +51,10 @@ The `Get` method looks simple and, the thing is, that here you shouldn't take ca
 
 All the magic is concealed in the <a href="https://github.com/akovanev/Utils.ResultExtensions/blob/master/src/StatusCodeHelper.cs">StatusCodeHelper</a>. However, if the default implementation doesn't match your requirements, then you just have to write your own helper class.
 
-The main idea behind getting a status code is based on several points
+The main idea behind getting a status code is based on several general things
 
 * The `REST` method.
-* Whether the `Result<T>` object is valid, in other words, the `Error` property is `null`.
-* Whether the `Data` property is `null` or not.
+* Whether the `Result<T>` object is valid (2xx) or not (4xx or 5xx).
+* Whether the `Data` property is `null` or not (makes sense for `PUT` and `PATCH` methods).
 
 The list of questions can be expanded. It will still be possible to create and apply a single strategy across all your services though. 
