@@ -21,7 +21,7 @@ title: Home
     {% for post in tag[1] %}
       <li>
         <a href="{{ post.url }}">{{ post.title }}</a>
-        {% if post.title == "Single Strategy for Retrieving Response Status Codes" %}
+        {% if post.title == "Single Strategy for Retrieving Response Status Codes in REST API" %}
           <a href="https://github.com/akovanev/Utils.ResultExtensions"><img style="display: inline; margin:0" src="/public/GitHub-Mark-32px.png"></a>
         {% endif %}
       </li>
