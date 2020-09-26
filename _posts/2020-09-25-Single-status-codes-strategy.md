@@ -1,11 +1,11 @@
 ---
 layout: post
-title: Single Strategy for Retrieving Response Status Codes 
+title: Single Strategy for Retrieving Response Status Codes in REST API
 category: blogs
 tag: Microservices
 ---
 
-While tons of information about using `REST` in the world of `microservices` is available on the web, I would like to focus on a very simple problem.
+While tons of information about using `REST API` is available on the web, I would like to focus on a very simple problem.
 
 The more services you expose, the more similar actions you must perform to return a body and status code. If you don't have a single strategy, then the *if-else* logic may repeat in each controller, despite it is not necessary.
 
