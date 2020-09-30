@@ -1,6 +1,6 @@
 ---
 layout: post
-title: New Microservice with PowerShell
+title: New Project with PowerShell
 category: blogs
 tag: Microservices
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Run Bunch of Services with PowerShell Locally
+title: Run Bunch of Services Locally with PowerShell 
 category: blogs
 tag: Microservices
 ---
