@@ -60,8 +60,9 @@ public class ExtendedGeneratorFactory : GeneratorFactory
 
 //In Main
 var dg = new DG(new ExtendedGeneratorFactory());
-Console.WriteLine(dg.Execute("data.json"));
-
+DataScheme scheme = dg.GetFromFile("data.json");
+string output = dg.GenerateJson(scheme);
+dg.SaveToFile("data.out.json", output);
 </code></pre>
 
 Calling the `GetRandomInstance` method, and passing `nameof(method)` as a parameter, should return the unique `Random` instance. Please do use it, rather than create your own `Random` object, as in this case, the randomness of the data will be lost at some extent.
