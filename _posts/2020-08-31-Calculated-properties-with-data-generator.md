@@ -49,9 +49,9 @@ So lets start from the definition.
 ]
 </code></pre>
 
-The target is the `fullname` property, which is supposed to concatenate the `firstname` and `lasttname`.
+Our target is the `fullname` property which should concatenate the `firstname` and `lasttname`.
 
-The `CalcGenerator` class will derive from `CalcGeneratorBase`. 
+We have to create a class that will derive from `CalcGeneratorBase`. Lets name it `CalcGenerator`.
 
 <pre><code class="language-cs">public class CalcGenerator : CalcGeneratorBase
 {
