@@ -5,9 +5,7 @@ category: blogs
 tag: Data Generator 
 ---
 
-Let me introduce the <a href="https://github.com/akovanev/DataGenerator/">Akov.DataGenerator</a>.
-
-Its <a href="https://github.com/akovanev/DataGenerator/blob/master/Akov.DataGenerator/Processors/DataProcessor.cs">DataProcessor</a> class creates random data based on the <a href="https://github.com/akovanev/DataGenerator/blob/master/Akov.DataGenerator/Scheme/DataScheme.cs">DataScheme</a>.
+The <a href="https://github.com/akovanev/DataGenerator/">Akov.DataGenerator</a> library helps creating random data based on the <a href="https://github.com/akovanev/DataGenerator/blob/master/Akov.DataGenerator/Scheme/DataScheme.cs">DataScheme</a>.
 
 There are two ways of how to populate the `DataScheme`. 
 * Using json.
@@ -29,14 +27,14 @@ class Sku
     public decimal Price {get; set;}
 }</code></pre>
 
-As a developer, I want to generate one hundred products. It is expected that the `Product.Name`, is just like the `Sku.Name`, should contain only symbols `[a-z0-9]`. There are some additional restictions on the length. The other properties, `LastUpdated` and `Price`, expect data in some ranges.
+As a developer, I want to generate one hundred products. It is expected that the `Product.Name`, is just like the `Sku.Name`, should contain only symbols `[a-z0-9]`. Lets supposet that there are some additional restictions on the length. The other properties, `LastUpdated` and `Price`, expect data in some ranges.
 
 The main idea behind the <code>DataGenerator</code> is that it should be possible to generate not only the correct data. The several types of failures were added in the current version. 
 * *null* result.
 * *Out of range* result.
 * Custom failure.
 
-The logic for the first two is more or less implemented, but it is better to override the result of custom errors. For now this is a string constant returning some error text.
+By default the result of custom failure is a string constant containing some error text. It can be overrided.
 
 For every property that requires a failure, the probability in the range `(0,1)` should be specified.
 
@@ -57,6 +55,7 @@ Lets take a look at the example.
           "name": "products",
           "type": "array",
           "pattern": "Product",
+          "minLength" 100,
           "maxLength": 100
         }
       ]
