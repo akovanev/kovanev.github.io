@@ -5,7 +5,7 @@ category: blogs
 tag: Data Generator 
 ---
 
-The <a href="https://github.com/akovanev/DataGenerator/">Akov.DataGenerator</a> library helps creating random data based on the <a href="https://github.com/akovanev/DataGenerator/blob/master/Akov.DataGenerator/Scheme/DataScheme.cs">DataScheme</a>.
+The <a href="https://github.com/akovanev/DataGenerator/">Akov.DataGenerator</a> library helps to generate random data based on the <a href="https://github.com/akovanev/DataGenerator/blob/master/Akov.DataGenerator/Scheme/DataScheme.cs">DataScheme</a>.
 
 There are two ways of how to populate the `DataScheme`. 
 * Using json.
