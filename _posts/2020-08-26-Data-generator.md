@@ -129,7 +129,7 @@ Lets take a look at the example.
   ]
 }</code></pre>
 
-The `root` value `"Root"` specifies the `name` of the definition to entry. Every definition consists of a list of properties that may point to other definitions.There should not be circular references though. 
+The `root` value `"Root"` specifies the `name` of the definition to entry. Every definition consists of a list of properties that may point to other definitions. There should not be circular references though. 
 
 There are some attributes, like the `name` and `type`, that should be mandatory filled. For arrays and objects, and in some other cases, the `pattern` is also required. More information can be found on the project repository on <a href="https://github.com/akovanev/DataGenerator">GitHub</a>.
 
