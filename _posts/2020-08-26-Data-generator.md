@@ -36,7 +36,7 @@ The main idea behind the <code>DataGenerator</code> is that it should be possibl
 
 By default the result of custom failure is a string constant containing some error text. It can be overrided.
 
-For every property that requires a failure, the probability in the range `(0,1)` should be specified.
+For each property that requires a failure, the probability in the range `(0,1)` should be specified.
 
 Lets take a look at the example.
 
