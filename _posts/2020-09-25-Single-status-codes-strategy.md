@@ -2,7 +2,7 @@
 layout: post
 title: Single Strategy for Retrieving Response Status Codes in REST API
 category: blogs
-tag: Microservices
+tag: RESTful APIs
 ---
 
 While tons of information about using `REST API` is available on the web, I would like to focus on a very simple problem.
