@@ -49,7 +49,7 @@ public class ImportService : JobServiceBase
         LogMessage("Import starts");
 
 		//Here should be some logic retrieving data from middleware
-        var content = Enumerable.Range(1, 100)
+        var content = Enumerable.Range(1, 101)
             .Select(x => new {name = $"name{x}", code = x})
             .ToList();
 
@@ -87,17 +87,17 @@ While the job is running the output and log will look like
 <pre><code class="nohighlight">
 2020-10-07 17:13:09,890 [81] INFO ImportJob: 10/7/2020 12:00:00 AM
 2020-10-07 17:13:09,892 [81] INFO ImportJob: Import starts
-2020-10-07 17:13:09,903 [81] INFO ImportJob: Execute: 10/100
-2020-10-07 17:13:09,916 [81] INFO ImportJob: Execute: 20/100
-2020-10-07 17:13:09,929 [81] INFO ImportJob: Execute: 30/100
-2020-10-07 17:13:09,933 [81] INFO ImportJob: Execute: 40/100
-2020-10-07 17:13:09,937 [81] INFO ImportJob: Execute: 50/100
-2020-10-07 17:13:09,939 [81] INFO ImportJob: Execute: 60/100
-2020-10-07 17:13:09,949 [81] INFO ImportJob: Execute: 70/100
-2020-10-07 17:13:09,953 [81] INFO ImportJob: Execute: 80/100
-2020-10-07 17:13:09,957 [81] INFO ImportJob: Execute: 90/100
-2020-10-07 17:13:09,962 [81] INFO ImportJob: Execute: 100/100
-2020-10-07 17:13:09,962 [81] INFO ImportJob: Execute: 100/100
+2020-10-07 17:13:09,903 [81] INFO ImportJob: Execute: 10/101
+2020-10-07 17:13:09,916 [81] INFO ImportJob: Execute: 20/101
+2020-10-07 17:13:09,929 [81] INFO ImportJob: Execute: 30/101
+2020-10-07 17:13:09,933 [81] INFO ImportJob: Execute: 40/101
+2020-10-07 17:13:09,937 [81] INFO ImportJob: Execute: 50/101
+2020-10-07 17:13:09,939 [81] INFO ImportJob: Execute: 60/101
+2020-10-07 17:13:09,949 [81] INFO ImportJob: Execute: 70/101
+2020-10-07 17:13:09,953 [81] INFO ImportJob: Execute: 80/101
+2020-10-07 17:13:09,957 [81] INFO ImportJob: Execute: 90/101
+2020-10-07 17:13:09,962 [81] INFO ImportJob: Execute: 100/101
+2020-10-07 17:13:09,962 [81] INFO ImportJob: Execute: 101/101
 2020-10-07 17:13:09,972 [81] INFO ImportJob: Import completed
 </code></pre>
 
