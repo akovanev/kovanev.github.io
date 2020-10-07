@@ -2,7 +2,7 @@
 layout: post
 title: New Project with PowerShell
 category: blogs
-tag: Powershell
+tag: PowerShell
 ---
 
 Since the choice of microservices implies that there will be a list of them, it is convenient to have a script that creates a new solution and adds common elements required for each service.

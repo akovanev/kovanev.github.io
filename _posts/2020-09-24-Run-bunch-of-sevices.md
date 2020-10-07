@@ -2,7 +2,7 @@
 layout: post
 title: Run Bunch of Services Locally with PowerShell 
 category: blogs
-tag: Powershell
+tag: PowerShell
 ---
 
 *Decide what you need to install locally, run everything else in docker containers.*
