@@ -8,7 +8,7 @@ tag: EPiServer
 
 Working with `EPiServer` on various projects for more than five years, I often have tasks to import or update content, users, prices etc. Using jobs in such tasks is a very common practice. 
 
-Every time I've seen a list of jobs and different efforts to extract the basic functionality at some abstract level. Every time the output, logging, exception handling strategies were not ideal.
+Every time I've seen a list of jobs and different efforts to extract the basic functionality at some abstract level. Every time the output, logging, exception handling strategies are not ideal.
 
 If you look at <a href="https://github.com/akovanev/EPiServer.Jobs.Extensions/">EPiServer.Jobs.Extensions</a> package you will find very simple logic, which despite this may save project hours. 
 
@@ -96,6 +96,7 @@ While the job is running the output and log will look like
 2020-10-07 17:13:09,949 [81] INFO ImportJob: Execute: 70/100
 2020-10-07 17:13:09,953 [81] INFO ImportJob: Execute: 80/100
 2020-10-07 17:13:09,957 [81] INFO ImportJob: Execute: 90/100
+2020-10-07 17:13:09,962 [81] INFO ImportJob: Execute: 100/100
 2020-10-07 17:13:09,962 [81] INFO ImportJob: Execute: 100/100
 2020-10-07 17:13:09,972 [81] INFO ImportJob: Import completed
 </code></pre>
