@@ -24,10 +24,10 @@ title: Home
         {% if post.title == "Single Strategy for Retrieving Response Status Codes in REST API" %}
           <a href="https://github.com/akovanev/Utils.ResultExtensions"><img style="display: inline; margin:0" src="/public/GitHub-Mark-32px.png"></a>
         {% endif %}
-        {% if post.title == "Output and Logging within EPiserver Jobs" %}
+        {% if post.title == "Output and Logging within EPiServer Jobs" %}
           <a href="https://github.com/akovanev/EPiServer.Jobs.Extensions"><img style="display: inline; margin:0" src="/public/GitHub-Mark-32px.png"></a>
           <a href="https://www.nuget.org/packages/Akov.EPiServer.Jobs.Extensions/"><img style="display: inline; margin:0" src="https://img.shields.io/nuget/v/Akov.EPiServer.Jobs.Extensions"></a>
-          <a href="https://www.nuget.org/packages/Akov.EPiServer.Jobs.Extensions/"><img style="display: inline; margin:0" src="https://img.shields.io/nuget/dt/akov.EPiServer.Jobs.Extensions"></a>
+          <a href="https://world.episerver.com/products/#CMS"><img style="display: inline; margin:0" src="https://img.shields.io/badge/EPiServer.CMS.Core-%2011.14-orange.svg"></a>
         {% endif %}
       </li>
     {% endfor %}

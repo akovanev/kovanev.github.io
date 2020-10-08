@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Output and Logging within EPiserver Jobs
+title: Output and Logging within EPiServer Jobs
 category: blogs
 tag: EPiServer
 ---
@@ -8,11 +8,11 @@ tag: EPiServer
 
 Working with `EPiServer` on various projects for more than five years, I often have tasks to import or update content, users, prices etc. Using jobs in such tasks is a very common practice. 
 
-Every time I've seen a list of jobs and different efforts to extract the basic functionality at some abstract level. Every time the output, logging, exception handling strategies are not ideal.
+Every time I've seen a list of jobs, every time I've seen different efforts to extract the basic functionality at some abstract level. Meanwhile the output, logging, exception handling strategies were not ideal.
 
-If you look at <a href="https://github.com/akovanev/EPiServer.Jobs.Extensions/">EPiServer.Jobs.Extensions</a> package you will find very simple logic, which despite this may save project hours. 
+If you look at <a href="https://github.com/akovanev/EPiServer.Jobs.Extensions/">EPiServer.Jobs.Extensions</a> you will find very simple logic, which, despite this, may save project hours. 
 
-Let's suppose I have an import task. I included the job extensions in my project. Then the code may look like
+In the example below I'll create an import job and import service using the package.
 <pre><code class="language-cs">
 [ScheduledPlugIn(
     DisplayName = "Import job",
@@ -59,8 +59,8 @@ public class ImportService : JobServiceBase
         {
             try
             {
-				//Here should be some import stuff. 
-				//For clarity I added exceptions 
+				//Here should be some update content stuff. 
+				//Some exceptions will be thrown.
                 if(item.code % 3 == 0) 
 					throw new Exception(item.code.ToString());
             }
